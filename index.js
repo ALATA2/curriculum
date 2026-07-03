@@ -260,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_contact: "CONTATTI",
       hero_subtitle: "CREATIVO DIGITALE | SVILUPPATORE INDIE | 3D & AI ARTIST",
       hero_explore: "ESPLORA I PROGETTI",
+      hero_download_cv: "SCARICA CV / PORTFOLIO",
       hero_contact: "CONTATTAMI",
       chi_sono_title: "CHI SONO",
       chi_sono_text: "Sono un creativo digitale e sviluppatore indipendente con un background che affonda le radici nella storia del videogioco (Commodore, Amiga) e guarda alle tecnologie del futuro. Nel mio percorso ho unito una formazione artistica (Liceo Artistico) a competenze tecniche (Informatica - Università di Torino), sviluppando un profilo ibrido e versatile. Che si tratti di produrre titoli indie in team o di collaborare con aziende dell'entertainment per la creazione di esperienze interattive, il mio obiettivo è fondere creatività, intelligenza artificiale e solido game design per realizzare progetti digitali originali, scalabili e commercialmente riconoscibili.",
@@ -283,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_contact: "CONTACT",
       hero_subtitle: "DIGITAL CREATIVE | INDIE DEVELOPER | 3D & AI ARTIST",
       hero_explore: "EXPLORE PROJECTS",
+      hero_download_cv: "DOWNLOAD CV / PORTFOLIO",
       hero_contact: "CONTACT ME",
       chi_sono_title: "ABOUT ME",
       chi_sono_text: "I am a digital creative and independent developer with a background rooted in video game history (Commodore, Amiga) looking towards future technologies. In my career, I have combined an artistic education (Art High School) with technical skills (Computer Science - University of Turin), developing a versatile hybrid profile. Whether producing indie titles in a team or collaborating with entertainment companies to create interactive experiences, my goal is to merge creativity, artificial intelligence, and solid game design to deliver digital projects that are original, scalable, and commercially recognizable.",
@@ -306,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_contact: "連絡先",
       hero_subtitle: "デジタルクリエイティブ | インディー開発者 | 3D & AI アーティスト",
       hero_explore: "プロジェクトを見る",
+      hero_download_cv: "CV / ポートフォリオをダウンロード",
       hero_contact: "お問い合わせ",
       chi_sono_title: "自己紹介",
       chi_sono_text: "コモドールやアミガといったビデオゲームの歴史にルーツを持ち、未来のテクノロジーを見据えて活動するデジタルクリエイター兼インディー開発者です。これまでのキャリアで、美術高校での芸術的な教育とトリノ大学での情報科学の技術的なスキルを融合させ、多才でハイブリッドなプロフィールを築いてきました。チームでのインディータイトルの制作から、エンターテインメント企業と連携したインタラクティブ体験の創造にいたるまで、私の目標は創造性、人工知能（AI）、そして確かなゲームデザインを融合し、オリジナリティがあり、スケール可能で、商業的に認知されるデジタルプロジェクトを実現することです。",
@@ -345,6 +348,18 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = translations[lang][key];
       }
     });
+
+    // Dynamically change CV download link based on selected language
+    const cvBtn = document.getElementById('cv-download-btn');
+    if (cvBtn) {
+      if (lang === 'it') {
+        cvBtn.setAttribute('href', 'Daniele_Pomposelli_CV_Portfolio_IT.pdf');
+      } else if (lang === 'en') {
+        cvBtn.setAttribute('href', 'Daniele_Pomposelli_CV_Portfolio_EN.pdf');
+      } else if (lang === 'ja') {
+        cvBtn.setAttribute('href', 'Daniele_Pomposelli_CV_Portfolio_JP.pdf');
+      }
+    }
 
     // Redraw experiences connection lines since translation text may shift layouts slightly
     setTimeout(drawTreeLines, 100);
