@@ -529,15 +529,14 @@ section {
   display: block;
 }
 
-/* Specific Node Coordinates & Widths on Desktop */
 #node-iiiteam { left: 184px; width: 86px; }
 #node-red41 { left: 281px; width: 86px; }
 #node-archipelago { left: 378px; width: 85px; }
 #node-bubbletaxi { left: 474px; width: 86px; }
 #node-tatacook { left: 572px; width: 85px; }
+#node-red41-gameplay { left: 669px; width: 85px; }
 
 #node-huawei { left: 326px; width: 130px; }
-#node-red41-gameplay { left: 474px; width: 85px; }
 #node-retro { left: 572px; width: 160px; }
 
 /* Custom Glows on hover per card theme */
