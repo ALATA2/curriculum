@@ -255,9 +255,9 @@ document.addEventListener('DOMContentLoaded', () => {
     it: {
       nav_home: "HOME",
       nav_portfolio: "PORTFOLIO",
-      nav_services: "SERVICES",
-      nav_about: "ABOUT",
-      nav_contact: "CONTACT",
+      nav_services: "SERVIZI",
+      nav_about: "CHI SONO",
+      nav_contact: "CONTATTI",
       hero_subtitle: "CREATIVO DIGITALE | SVILUPPATORE INDIE | 3D & AI ARTIST",
       hero_explore: "ESPLORA I PROGETTI",
       hero_contact: "CONTATTAMI",
