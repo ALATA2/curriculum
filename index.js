@@ -274,6 +274,9 @@ document.addEventListener('DOMContentLoaded', () => {
       skill_design_title: "Game & Level Design",
       esperienze_title: "ESPERIENZE",
       progetti_web_title: "PROGETTI WEB",
+      project_sesia_desc: "Portale di valorizzazione e-commerce e turistica della Valsesia.",
+      project_vale_desc: "Blog di ricette, food branding e consulenza gastronomica.",
+      contact_title: "CYBER_COMMUNICATION_PROTOCOL",
       contact_email: "Email"
     },
     en: {
@@ -298,6 +301,9 @@ document.addEventListener('DOMContentLoaded', () => {
       skill_design_title: "Game & Level Design",
       esperienze_title: "EXPERIENCE",
       progetti_web_title: "WEB PROJECTS",
+      project_sesia_desc: "E-commerce and tourism development portal of Valsesia.",
+      project_vale_desc: "Recipe blog, food branding, and culinary consulting.",
+      contact_title: "CYBER_COMMUNICATION_PROTOCOL",
       contact_email: "Email"
     },
     ja: {
@@ -322,6 +328,9 @@ document.addEventListener('DOMContentLoaded', () => {
       skill_design_title: "ゲーム & レベルデザイン",
       esperienze_title: "経歴・実績",
       progetti_web_title: "ウェブプロジェクト",
+      project_sesia_desc: "ヴァルセージア地方のEコマースおよび観光促進ポータルサイト。",
+      project_vale_desc: "レシピブログ、フードブランディング、および料理コンサルティング。",
+      contact_title: "サイバー通信プロトコル",
       contact_email: "Eメール"
     }
   };
