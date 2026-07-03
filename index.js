@@ -249,4 +249,104 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Multi-Language Translation Data
+  const translations = {
+    it: {
+      nav_home: "HOME",
+      nav_portfolio: "PORTFOLIO",
+      nav_services: "SERVICES",
+      nav_about: "ABOUT",
+      nav_contact: "CONTACT",
+      hero_subtitle: "CREATIVO DIGITALE | SVILUPPATORE INDIE | 3D & AI ARTIST",
+      hero_explore: "ESPLORA I PROGETTI",
+      hero_contact: "CONTATTAMI",
+      chi_sono_title: "CHI SONO",
+      chi_sono_text: "Sono un creativo digitale e sviluppatore indipendente con un background che affonda le radici nella storia del videogioco (Commodore, Amiga) e guarda alle tecnologie del futuro. Nel mio percorso ho unito una formazione artistica (Liceo Artistico) a competenze tecniche (Informatica - Università di Torino), sviluppando un profilo ibrido e versatile. Che si tratti di produrre titoli indie in team o di collaborare con aziende dell'entertainment per la creazione di esperienze interattive, il mio obiettivo è fondere creatività, intelligenza artificiale e solido game design per realizzare progetti digitali originali, scalabili e commercialmente riconoscibili.",
+      competenze_title: "COMPETENZE CORE",
+      skill_3d_title: "3D Art & Pipeline Visiva",
+      skill_3d_desc: "(Blender, asset, materiali)",
+      skill_ai_title: "AI Power User",
+      skill_ai_desc: "(AI Generativa: texture, concept art, mesh 3D)",
+      skill_code_title: "Sviluppo & Prototipazione",
+      skill_code_desc: "(HTML, CSS3, JS vanilla)",
+      skill_design_title: "Game & Level Design",
+      esperienze_title: "ESPERIENZE",
+      progetti_web_title: "PROGETTI WEB",
+      contact_email: "Email"
+    },
+    en: {
+      nav_home: "HOME",
+      nav_portfolio: "PORTFOLIO",
+      nav_services: "SERVICES",
+      nav_about: "ABOUT",
+      nav_contact: "CONTACT",
+      hero_subtitle: "DIGITAL CREATIVE | INDIE DEVELOPER | 3D & AI ARTIST",
+      hero_explore: "EXPLORE PROJECTS",
+      hero_contact: "CONTACT ME",
+      chi_sono_title: "ABOUT ME",
+      chi_sono_text: "I am a digital creative and independent developer with a background rooted in video game history (Commodore, Amiga) looking towards future technologies. In my career, I have combined an artistic education (Art High School) with technical skills (Computer Science - University of Turin), developing a versatile hybrid profile. Whether producing indie titles in a team or collaborating with entertainment companies to create interactive experiences, my goal is to merge creativity, artificial intelligence, and solid game design to deliver digital projects that are original, scalable, and commercially recognizable.",
+      competenze_title: "CORE SKILLS",
+      skill_3d_title: "3D Art & Visual Pipeline",
+      skill_3d_desc: "(Blender, assets, materials)",
+      skill_ai_title: "AI Power User",
+      skill_ai_desc: "(Generative AI: textures, concept art, 3D mesh)",
+      skill_code_title: "Coding & Prototyping",
+      skill_code_desc: "(HTML, CSS3, vanilla JS)",
+      skill_design_title: "Game & Level Design",
+      esperienze_title: "EXPERIENCE",
+      progetti_web_title: "WEB PROJECTS",
+      contact_email: "Email"
+    },
+    ja: {
+      nav_home: "ホーム",
+      nav_portfolio: "ポートフォリオ",
+      nav_services: "サービス",
+      nav_about: "アバウト",
+      nav_contact: "連絡先",
+      hero_subtitle: "デジタルクリエイティブ | インディー開発者 | 3D & AI アーティスト",
+      hero_explore: "プロジェクトを見る",
+      hero_contact: "お問い合わせ",
+      chi_sono_title: "自己紹介",
+      chi_sono_text: "コモドールやアミガといったビデオゲームの歴史にルーツを持ち、未来のテクノロジーを見据えて活動するデジタルクリエイター兼インディー開発者です。これまでのキャリアで、美術高校での芸術的な教育とトリノ大学での情報科学の技術的なスキルを融合させ、多才でハイブリッドなプロフィールを築いてきました。チームでのインディータイトルの制作から、エンターテインメント企業と連携したインタラクティブ体験の創造にいたるまで、私の目標は創造性、人工知能（AI）、そして確かなゲームデザインを融合し、オリジナリティがあり、スケール可能で、商業的に認知されるデジタルプロジェクトを実現することです。",
+      competenze_title: "コアスキル",
+      skill_3d_title: "3Dアート & ビジュアルパイプライン",
+      skill_3d_desc: "(Blender, アセット, マテリアル)",
+      skill_ai_title: "AIパワーユーザー",
+      skill_ai_desc: "(生成AI: テクスチャ, コンセプトアート, 3Dメッシュ)",
+      skill_code_title: "開発 & プロトタイピング",
+      skill_code_desc: "(HTML, CSS3, バニラJS)",
+      skill_design_title: "ゲーム & レベルデザイン",
+      esperienze_title: "経歴・実績",
+      progetti_web_title: "ウェブプロジェクト",
+      contact_email: "Eメール"
+    }
+  };
+
+  // Language selector button event listeners
+  const langButtons = document.querySelectorAll('.lang-btn');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedLang = btn.getAttribute('data-lang');
+      setLanguage(selectedLang);
+    });
+  });
+
+  function setLanguage(lang) {
+    // Toggle active class on language selector buttons
+    langButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    // Translate all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang] && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Redraw experiences connection lines since translation text may shift layouts slightly
+    setTimeout(drawTreeLines, 100);
+  }
 });
