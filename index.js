@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     bubbletaxi: document.getElementById('node-bubbletaxi'),
     tatacook: document.getElementById('node-tatacook'),
     huawei: document.getElementById('node-huawei'),
-    retro: document.getElementById('node-retro')
+    retro: document.getElementById('node-retro'),
+    red41gameplay: document.getElementById('node-red41-gameplay')
   };
 
   // SVG Marker Setup (Arrowhead)
@@ -89,7 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
       bubbletaxi: getCoords(nodes.bubbletaxi),
       tatacook: getCoords(nodes.tatacook),
       huawei: getCoords(nodes.huawei),
-      retro: getCoords(nodes.retro)
+      retro: getCoords(nodes.retro),
+      red41gameplay: getCoords(nodes.red41gameplay)
     };
 
     // 1. Horizontal connections in Top Row
@@ -146,6 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
       `M ${c.tatacook.cx} ${c.tatacook.bottom} L ${c.tatacook.cx} ${c.retro.top}`,
       true
     );
+
+    // RED41 -> RED41 Gameplay (Down then Right)
+    const turnY_red41 = (c.red41.bottom + c.red41gameplay.top) / 2;
+    createLinePath(
+      'line-red41-gameplay',
+      `M ${c.red41.cx} ${c.red41.bottom} L ${c.red41.cx} ${turnY_red41} L ${c.red41gameplay.cx} ${turnY_red41} L ${c.red41gameplay.cx} ${c.red41gameplay.top}`,
+      true
+    );
   }
 
   // Draw lines on page load and window resize
@@ -157,12 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Micro-interactions: Highlight adjacent SVG paths on card hover
   const nodeConnections = {
     iiiteam: ['line-iiiteam-red41', 'line-iiiteam-huawei'],
-    red41: ['line-iiiteam-red41', 'line-red41-archipelago'],
+    red41: ['line-iiiteam-red41', 'line-red41-archipelago', 'line-red41-gameplay'],
     archipelago: ['line-red41-archipelago', 'line-archipelago-bubbletaxi'],
     bubbletaxi: ['line-archipelago-bubbletaxi', 'line-bubbletaxi-tatacook'],
     tatacook: ['line-bubbletaxi-tatacook', 'line-tatacook-retro', 'line-tatacook-end'],
     huawei: ['line-iiiteam-huawei'],
-    retro: ['line-tatacook-retro']
+    retro: ['line-tatacook-retro'],
+    red41gameplay: ['line-red41-gameplay']
   };
 
   Object.keys(nodes).forEach(key => {

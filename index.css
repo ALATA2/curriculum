@@ -537,6 +537,7 @@ section {
 #node-tatacook { left: 572px; width: 85px; }
 
 #node-huawei { left: 326px; width: 130px; }
+#node-red41-gameplay { left: 474px; width: 85px; }
 #node-retro { left: 572px; width: 160px; }
 
 /* Custom Glows on hover per card theme */
@@ -546,6 +547,7 @@ section {
 #node-bubbletaxi:hover .card-inner { box-shadow: 0 0 16px rgba(0, 240, 255, 0.6); }
 #node-tatacook:hover .card-inner { box-shadow: 0 0 16px rgba(189, 0, 255, 0.6); }
 #node-huawei:hover .card-inner { box-shadow: 0 0 16px rgba(255, 0, 0, 0.5); }
+#node-red41-gameplay:hover .card-inner { box-shadow: 0 0 16px rgba(255, 0, 127, 0.6); }
 #node-retro:hover .card-inner { box-shadow: 0 0 16px rgba(189, 0, 255, 0.6); }
 
 /* Web Projects Section */
