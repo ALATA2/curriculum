@@ -453,7 +453,7 @@ section {
   position: relative;
   width: 100%;
   max-width: 855px;
-  height: 230px;
+  height: 260px;
   margin: 40px auto 0 auto;
 }
 
@@ -536,8 +536,8 @@ section {
 #node-bubbletaxi { left: 474px; width: 86px; }
 #node-tatacook { left: 572px; width: 85px; }
 
-#node-huawei { left: 326px; width: 234px; }
-#node-retro { left: 572px; width: 203px; }
+#node-huawei { left: 326px; width: 130px; }
+#node-retro { left: 572px; width: 160px; }
 
 /* Custom Glows on hover per card theme */
 #node-iiiteam:hover .card-inner { box-shadow: 0 0 16px rgba(0, 240, 255, 0.6); }
