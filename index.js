@@ -353,7 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
       contact_email: "Eメール"
     }
   };
-
   // Language selector button event listeners
   const langButtons = document.querySelectorAll('.lang-btn');
   langButtons.forEach(btn => {
@@ -389,7 +388,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // Update URL query parameter without reloading the page
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?lang=${lang}` + window.location.hash;
+    window.history.replaceState({ path: newUrl }, '', newUrl);
+
     // Redraw experiences connection lines since translation text may shift layouts slightly
     setTimeout(drawTreeLines, 100);
+  }
+
+  // Initialize language from URL parameter on load
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlLang = urlParams.get('lang');
+  if (urlLang && translations[urlLang]) {
+    setLanguage(urlLang);
+  } else {
+    // Default language on page load
+    setLanguage('it');
   }
 });
