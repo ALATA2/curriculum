@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.skill-tree-container');
   const svg = document.getElementById('skill-tree-svg');
-  const sections = document.querySelectorAll('section, footer, #chi-sono-bento');
+  const sections = document.querySelectorAll('section, footer');
   const navLinks = document.querySelectorAll('.nav-link');
 
   // Define experience cards node elements
@@ -209,9 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ScrollSpy to highlight active navigation link
+  const contentPanel = document.querySelector('.content-panel');
+
   function scrollSpy() {
     let currentId = '';
-    const scrollPosition = window.scrollY + 160;
+    const isMobile = window.innerWidth <= 900;
+    const scrollPosition = (isMobile ? window.scrollY : contentPanel.scrollTop) + 160;
 
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
@@ -222,7 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Special case for footer/contact at bottom
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+    const isBottom = isMobile 
+      ? (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 80
+      : (contentPanel.clientHeight + contentPanel.scrollTop) >= contentPanel.scrollHeight - 80;
+
+    if (isBottom) {
       currentId = 'contatti';
     }
 
@@ -235,6 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.addEventListener('scroll', scrollSpy);
+  if (contentPanel) {
+    contentPanel.addEventListener('scroll', scrollSpy);
+  }
 
   // Smooth scroll for nav links (optional override fallback)
   navLinks.forEach(link => {

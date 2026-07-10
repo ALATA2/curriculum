@@ -39,44 +39,6 @@ body {
   line-height: 1.6;
 }
 
-/* Futuristic Scanline Sweep Animation */
-.scanline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.22) 50%
-  ), linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.015),
-    rgba(0, 0, 255, 0.03)
-  );
-  background-size: 100% 4px, 6px 100%;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.scanline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: rgba(0, 240, 255, 0.08);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-  animation: scanline-sweep 12s linear infinite;
-}
-
-@keyframes scanline-sweep {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
 /* Background Wireframe & Glow Decorations */
 .wireframe-decorations {
   position: absolute;
@@ -181,45 +143,162 @@ body {
   object-fit: contain;
 }
 
-/* Header & Nav */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(7, 9, 19, 0.75);
-  border-bottom: 1px solid rgba(0, 240, 255, 0.12);
-}
-
-.nav-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 18px 24px;
+/* ==========================================================================
+   Split-Screen Dashboard Layout
+   ========================================================================== */
+.app-layout {
   display: flex;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-nav ul {
+/* Sidebar HUD Panel (Left side) */
+.sidebar-hud {
+  width: 320px;
+  height: 100vh;
+  flex-shrink: 0;
+  background: rgba(13, 20, 38, 0.7);
+  border-right: 1px solid rgba(0, 240, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 40px 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+  text-align: center;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.sidebar-header .profile-pic-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 240, 255, 0.3);
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.sidebar-header .profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar-header .hero-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 0;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.sidebar-header .hero-subtitle {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  width: 100%;
+  margin: 30px 0;
+}
+
+.sidebar-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 35px;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
-nav a {
+.sidebar-nav li {
+  width: 100%;
+  text-align: center;
+}
+
+.sidebar-nav a {
+  display: inline-block;
   color: var(--text-light);
   text-decoration: none;
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   position: relative;
   padding: 6px 0;
+}
+
+.sidebar-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
+  transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.sidebar-nav a:hover, .sidebar-nav a.active {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
+.sidebar-nav a:hover::after, .sidebar-nav a.active::after {
+  width: 100%;
+}
+
+.sidebar-actions {
+  width: 100%;
+}
+
+.sidebar-actions .btn {
+  width: 100%;
+  text-align: center;
+}
+
+.sidebar-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Scrollable Content Panel (Right side) */
+.content-panel {
+  flex-grow: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 60px 40px;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 10;
 }
 
 nav a::after {
@@ -247,9 +326,6 @@ nav a:hover::after, nav a.active::after {
 main {
   position: relative;
   z-index: 10;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 80px 24px 40px 24px;
 }
 
 /* Sections Base Styling */
@@ -1105,7 +1181,54 @@ footer {
     opacity: 0.3; /* fade decor elements so they do not clash with content */
   }
 
-  /* Skills Grid Adjustment */
+  /* Split-screen mobile stacking */
+  .app-layout {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+    width: 100%;
+  }
+
+  body {
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .sidebar-hud {
+    width: 100%;
+    height: auto;
+    padding: 30px 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    gap: 20px;
+  }
+
+  .sidebar-nav {
+    margin: 15px 0;
+  }
+
+  .sidebar-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .sidebar-actions {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .content-panel {
+    width: 100%;
+    height: auto;
+    overflow-y: visible;
+    padding: 40px 20px;
+  }
+
+  /* Bento Grid Adjustment */
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
@@ -1166,53 +1289,22 @@ footer {
 
 /* Smartphone Layout (max-width: 600px) */
 @media (max-width: 600px) {
-  /* Navigation spacing */
-  .nav-container {
-    padding: 14px 15px;
+  .sidebar-header .hero-name {
+    font-size: 1.3rem;
   }
 
-  nav ul {
-    gap: 18px;
+  .sidebar-header .profile-pic-container {
+    width: 100px;
+    height: 100px;
   }
 
-  nav a {
-    font-size: 0.72rem;
-    letter-spacing: 1px;
+  .sidebar-nav ul {
+    gap: 10px 18px;
   }
 
-  /* Hero Section Stacked */
-  .hero-section {
-    padding: 50px 0;
-  }
-
-  .hero-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 25px;
-  }
-
-  .profile-pic-container {
-    width: 140px;
-    height: 140px;
-  }
-
-  .hero-name {
-    font-size: 2.2rem;
-  }
-
-  .hero-subtitle {
-    font-size: 0.75rem;
-    line-height: 1.4;
-    margin-bottom: 22px;
-  }
-
-  .hero-actions {
-    justify-content: center;
-    flex-direction: column;
+  .sidebar-actions {
     width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
-    gap: 12px;
+    max-width: 240px;
   }
 
   .btn {
@@ -1262,13 +1354,10 @@ footer {
 
 /* Language Selector styling */
 .lang-selector {
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   gap: 8px;
   align-items: center;
+  justify-content: center;
 }
 
 .lang-btn {
@@ -1297,17 +1386,4 @@ footer {
   border-color: #00f0ff;
   color: #0d0d0d;
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
-}
-
-@media (max-width: 768px) {
-  .nav-container {
-    flex-direction: column;
-    gap: 12px;
-  }
-  .lang-selector {
-    position: static;
-    transform: none;
-    margin-top: 5px;
-    justify-content: center;
-  }
 }
