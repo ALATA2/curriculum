@@ -1351,13 +1351,26 @@ footer {
     justify-content: center;
   }
 }
-
 /* Language Selector styling */
 .lang-selector {
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
+}
+
+.lang-floating {
+  position: fixed;
+  top: 25px;
+  right: 40px;
+  z-index: 1000;
+  background: rgba(13, 20, 38, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: 6px;
+  border-radius: 6px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .lang-btn {
@@ -1386,4 +1399,13 @@ footer {
   border-color: #00f0ff;
   color: #0d0d0d;
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+@media (max-width: 900px) {
+  .lang-floating {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(13, 20, 38, 0.85);
+  }
 }
