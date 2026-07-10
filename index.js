@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.skill-tree-container');
   const svg = document.getElementById('skill-tree-svg');
-  const sections = document.querySelectorAll('section, footer');
+  const sections = document.querySelectorAll('section, footer, #chi-sono-bento');
   const navLinks = document.querySelectorAll('.nav-link');
 
   // Define experience cards node elements
@@ -274,6 +274,9 @@ document.addEventListener('DOMContentLoaded', () => {
       skill_design_title: "Game & Level Design",
       esperienze_title: "ESPERIENZE",
       progetti_web_title: "PROGETTI WEB",
+      dashboard_title: "DASHBOARD DI SISTEMA",
+      status_title: "STATO DEL SISTEMA",
+      status_loc: "BORGOSESIA_VC",
       project_sesia_desc: "Motore di ricerca della Valsesia.",
       project_vale_desc: "Blog di ricette, food branding e consulenza gastronomica.",
       contact_title: "CYBER_COMMUNICATION_PROTOCOL",
@@ -301,6 +304,9 @@ document.addEventListener('DOMContentLoaded', () => {
       skill_design_title: "Game & Level Design",
       esperienze_title: "EXPERIENCE",
       progetti_web_title: "WEB PROJECTS",
+      dashboard_title: "SYSTEM DASHBOARD",
+      status_title: "SYSTEM STATUS",
+      status_loc: "BORGOSESIA_VC",
       project_sesia_desc: "Search engine of Valsesia.",
       project_vale_desc: "Recipe blog, food branding, and culinary consulting.",
       contact_title: "CYBER_COMMUNICATION_PROTOCOL",
@@ -328,6 +334,9 @@ document.addEventListener('DOMContentLoaded', () => {
       skill_design_title: "ゲーム & レベルデザイン",
       esperienze_title: "経歴・実績",
       progetti_web_title: "ウェブプロジェクト",
+      dashboard_title: "システムダッシュボード",
+      status_title: "システムステータス",
+      status_loc: "ボルゴセージア_VC",
       project_sesia_desc: "ヴァルセージア地方の検索エンジン。",
       project_vale_desc: "レシピブログ、フードブランディング、および料理コンサルティング。",
       contact_title: "サイバー通信プロトコル",

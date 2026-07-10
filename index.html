@@ -19,12 +19,15 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
+
+  <!-- Futuristic Scanline Sweep Overlay -->
+  <div class="scanline"></div>
 
   <!-- Floating 3D Geometric Wireframes Backdrop -->
   <div class="wireframe-decorations">
@@ -61,11 +64,11 @@
     <div class="nav-container">
       <nav>
         <ul>
-          <li><a href="#home" class="nav-link active" data-i18n="nav_home">HOME</a></li>
-          <li><a href="#esperienze" class="nav-link" data-i18n="nav_portfolio">PORTFOLIO</a></li>
-          <li><a href="#competenze" class="nav-link" data-i18n="nav_services">SERVICES</a></li>
-          <li><a href="#chi-sono" class="nav-link" data-i18n="nav_about">ABOUT</a></li>
-          <li><a href="#contatti" class="nav-link" data-i18n="nav_contact">CONTACT</a></li>
+          <li><a href="#home" class="nav-link active" data-i18n="nav_home">[01] HOME</a></li>
+          <li><a href="#esperienze" class="nav-link" data-i18n="nav_portfolio">[02] PORTFOLIO</a></li>
+          <li><a href="#dashboard" class="nav-link" data-i18n="nav_services">[03] SERVICES</a></li>
+          <li><a href="#chi-sono-bento" class="nav-link" data-i18n="nav_about">[04] ABOUT</a></li>
+          <li><a href="#contatti" class="nav-link" data-i18n="nav_contact">[05] CONTACT</a></li>
         </ul>
       </nav>
       <div class="lang-selector">
@@ -95,21 +98,57 @@
       </div>
     </section>
 
-    <section id="chi-sono" class="about-section">
+    <!-- Dashboard Section (Bento Grid) -->
+    <section id="dashboard" class="dashboard-section">
       <div class="section-container">
-        <h2 class="section-title" data-i18n="chi_sono_title">CHI SONO</h2>
-        <div class="about-content">
-          <p data-i18n="chi_sono_text">Sono un creativo digitale e sviluppatore indipendente con base a Borgosesia (Valsesia), con un background che affonda le radici nella storia del videogioco (Commodore, Amiga) e guarda alle tecnologie del futuro. Nel mio percorso ho unito una formazione artistica (Liceo Artistico) a competenze tecniche (Informatica - Università di Torino), sviluppando un profilo ibrido e versatile. Che si tratti di produrre titoli indie in team o di collaborare con aziende dell'entertainment per la creazione di esperienze interattive, il mio obiettivo è fondere creatività, intelligenza artificiale e solido game design per realizzare progetti digitali originali, scalabili e commercialmente riconoscibili.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="competenze" class="skills-section">
-      <div class="section-container">
-        <h2 class="section-title" data-i18n="competenze_title">COMPETENZE CORE</h2>
-        <div class="skills-grid">
+        <h2 class="section-title" data-i18n="dashboard_title">SYSTEM DASHBOARD</h2>
+        <div class="bento-grid">
           
-          <div class="skill-card">
+          <!-- Block 1: About Me (Chi Sono) -->
+          <div class="bento-card bento-about card-hud" id="chi-sono-bento">
+            <h3 class="bento-header" data-i18n="chi_sono_title">CHI SONO</h3>
+            <div class="bento-body">
+              <p class="about-text" data-i18n="chi_sono_text">Sono un creativo digitale e sviluppatore indipendente con base a Borgosesia (Valsesia), con un background che affonda le radici nella storia del videogioco (Commodore, Amiga) e guarda alle tecnologie del futuro. Nel mio percorso ho unito una formazione artistica (Liceo Artistico) a competenze tecniche (Informatica - Università di Torino), sviluppando un profilo ibrido e versatile. Che si tratti di produrre titoli indie in team o di collaborare con aziende dell'entertainment per la creazione di esperienze interattive, il mio obiettivo è fondere creatività, intelligenza artificiale e solido game design per realizzare progetti digitali originali, scalabili e commercialmente riconoscibili.</p>
+            </div>
+          </div>
+          
+          <!-- Block 2: System Status (Stats) -->
+          <div class="bento-card bento-status card-hud">
+            <h3 class="bento-header" data-i18n="status_title">SYSTEM STATUS</h3>
+            <div class="bento-body">
+              <div class="status-list">
+                <div class="status-item">
+                  <span class="status-label">USER:</span>
+                  <span class="status-value val-cyan">DANIELE_POMPOSELLI</span>
+                </div>
+                <div class="status-item">
+                  <span class="status-label">LOC:</span>
+                  <span class="status-value val-cyan" data-i18n="status_loc">BORGOSESIA_VC</span>
+                </div>
+                <div class="status-item">
+                  <span class="status-label">CORE_ENGINE:</span>
+                  <div class="status-bar-wrapper">
+                    <div class="status-bar bar-magenta" style="width: 98%;"></div>
+                    <span class="status-bar-text">98%</span>
+                  </div>
+                </div>
+                <div class="status-item">
+                  <span class="status-label">CREATIVE_FLOW:</span>
+                  <div class="status-bar-wrapper">
+                    <div class="status-bar bar-cyan" style="width: 100%;"></div>
+                    <span class="status-bar-text">100%</span>
+                  </div>
+                </div>
+                <div class="status-item">
+                  <span class="status-label">PIPELINE:</span>
+                  <span class="status-value val-purple">ONLINE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 3: Skill 3D -->
+          <div class="bento-card bento-skill card-hud">
             <div class="skill-icon-wrapper">
               <img src="assets/skill_3d.png" alt="3D Art Icon" class="skill-icon">
             </div>
@@ -117,7 +156,8 @@
             <p class="skill-desc" data-i18n="skill_3d_desc">(Blender, asset, materiali)</p>
           </div>
 
-          <div class="skill-card">
+          <!-- Block 4: Skill AI -->
+          <div class="bento-card bento-skill card-hud">
             <div class="skill-icon-wrapper">
               <img src="assets/skill_ai.png" alt="AI Icon" class="skill-icon">
             </div>
@@ -125,7 +165,8 @@
             <p class="skill-desc" data-i18n="skill_ai_desc">(AI Generativa: texture, concept art, mesh 3D)</p>
           </div>
 
-          <div class="skill-card">
+          <!-- Block 5: Skill Code -->
+          <div class="bento-card bento-skill card-hud">
             <div class="skill-icon-wrapper">
               <img src="assets/skill_code.png" alt="Development Icon" class="skill-icon">
             </div>
@@ -133,7 +174,8 @@
             <p class="skill-desc" data-i18n="skill_code_desc">(HTML, CSS3, JS vanilla)</p>
           </div>
 
-          <div class="skill-card">
+          <!-- Block 6: Skill Design -->
+          <div class="bento-card bento-skill card-hud">
             <div class="skill-icon-wrapper">
               <img src="assets/skill_design.png" alt="Game Design Icon" class="skill-icon">
             </div>
