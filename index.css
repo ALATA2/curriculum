@@ -1205,6 +1205,10 @@ footer {
     gap: 20px;
   }
 
+  .sidebar-header .profile-pic-container {
+    transform: translateX(-35px);
+  }
+
   .sidebar-nav {
     margin: 15px 0;
   }
