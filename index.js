@@ -396,13 +396,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(drawTreeLines, 100);
   }
 
-  // Initialize language from URL parameter on load
+  // Initialize language from URL parameter or detect browser language on load
   const urlParams = new URLSearchParams(window.location.search);
   const urlLang = urlParams.get('lang');
   if (urlLang && translations[urlLang]) {
     setLanguage(urlLang);
   } else {
-    // Default language on page load
-    setLanguage('it');
+    // Detect browser language (first two letters, e.g., 'it', 'en', 'ja')
+    const browserLang = (navigator.language || navigator.userLanguage || '').substring(0, 2).toLowerCase();
+    if (translations[browserLang]) {
+      setLanguage(browserLang);
+    } else {
+      // Default to English for all other international visitors
+      setLanguage('en');
+    }
   }
 });
