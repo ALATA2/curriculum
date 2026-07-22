@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404: Node Not Found | Daniele Pomposelli</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/controller.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+  
+  <style>
+    .error-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100vw;
+      padding: 20px;
+      z-index: 10;
+      position: relative;
+    }
+    .error-card {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      padding: 40px 30px;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      position: relative;
+      background: rgba(13, 20, 38, 0.7) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .error-code {
+      font-family: var(--font-retro);
+      font-size: 3rem;
+      color: var(--neon-magenta);
+      text-shadow: 0 0 15px rgba(255, 0, 212, 0.6);
+      margin-bottom: 20px;
+      animation: pulse-glow 2s infinite;
+    }
+    .error-title {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+      font-size: 1.1rem;
+    }
+    .error-msg {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .error-msg strong {
+      color: var(--neon-cyan);
+      font-family: 'Space Mono', monospace;
+    }
+    .error-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+      margin: 25px 0;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating 3D Geometric Wireframes Backdrop -->
+  <div class="wireframe-decorations">
+    <img src="assets/pyramid_cyan.png" alt="Cyan Wireframe Pyramid" class="decor-pyramid">
+    <img src="assets/cube_magenta.png" alt="Magenta Wireframe Cube" class="decor-cube-magenta">
+  </div>
+
+  <div class="error-container">
+    <div class="error-card card-hud">
+      <div class="error-code">404</div>
+      <h1 class="error-title">[ SYSTEM_CRASH: NODE_NOT_FOUND ]</h1>
+      
+      <p class="error-msg"><strong>IT_</strong> La pagina che stai cercando è stata spostata, eliminata o non è mai esistita nel sistema.</p>
+      <p class="error-msg"><strong>EN_</strong> The page you are looking for has been moved, deleted, or never existed in the system.</p>
+      <p class="error-msg"><strong>JA_</strong> お探しのページは移動されたか、削除されたか、システムに存在しません。</p>
+      
+      <div class="error-divider"></div>
+      
+      <a href="https://danielepomposelli.com" class="btn btn-outline" style="display: inline-block; text-decoration: none;">
+        &lt; RETURN_TO_HOME_ /&gt;
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
