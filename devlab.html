@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daniele Pomposelli // Dev Lab & Playtest Feedback</title>
-  <meta name="description" content="Laboratorio di sviluppo giochi indie di Daniele Pomposelli. Prova Turclon e Cryworld nel browser e invia il tuo feedback per migliorare i titoli!">
+  <title>Daniele Pomposelli // Dev Lab &amp; Game Devlogs</title>
+  <meta name="description" content="Laboratorio di sviluppo giochi indie e devlog di Daniele Pomposelli. Prova Turclon e Cryworld, guarda video e immagini dello sviluppo e commenta per dare il tuo feedback!">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/controller.png">
@@ -14,73 +14,115 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   
-  <!-- CSS Stylesheet -->
+  <!-- Base Stylesheet -->
   <link rel="stylesheet" href="index.css">
 
   <style>
-    /* Specific Styles for DevLab */
-    .devlab-body {
+    /* ==========================================================================
+       DEVLAB & BLOG/FORUM SPECIFIC STYLES
+       ========================================================================== */
+    body.devlab-body {
       overflow-y: auto !important;
       min-height: 100vh;
-      background: radial-gradient(circle at 50% 0%, #0c202d 0%, #070913 80%);
-      padding: 40px 20px 80px 20px;
+      background: radial-gradient(circle at 50% 0%, #0c202d 0%, #070913 85%);
+      color: var(--text-light);
+      padding: 30px 15px 80px 15px;
     }
 
-    .devlab-container {
-      max-width: 1100px;
+    .devlab-wrapper {
+      max-width: 1050px;
       margin: 0 auto;
       position: relative;
       z-index: 10;
     }
 
-    /* Top Navigation Bar */
-    .devlab-top-nav {
+    /* Top Navigation */
+    .devlab-nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       flex-wrap: wrap;
       gap: 15px;
     }
 
-    .btn-back {
+    .nav-left-group {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-nav {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: 'Space Mono', monospace;
       font-size: 0.85rem;
-      padding: 10px 20px;
+      padding: 9px 18px;
       text-decoration: none;
+      border-radius: 4px;
     }
 
-    /* Header Banner */
-    .devlab-hero {
+    .btn-new-post {
+      background: rgba(255, 0, 212, 0.15);
+      border: 1px solid var(--neon-magenta);
+      color: var(--neon-magenta);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-new-post:hover {
+      background: var(--neon-magenta);
+      color: #070913;
+      box-shadow: 0 0 16px var(--neon-magenta);
+    }
+
+    /* Hero section */
+    .devlab-header-card {
       text-align: center;
-      margin-bottom: 50px;
-      padding: 30px 20px;
-      background: rgba(13, 20, 38, 0.6);
-      border: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 35px 25px;
+      background: rgba(13, 20, 38, 0.65);
+      border: 1px solid rgba(0, 240, 255, 0.25);
       border-radius: 8px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      margin-bottom: 40px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
-    .devlab-title {
+    .devlab-header-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+    }
+
+    .devlab-main-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 2.4rem;
+      font-size: 2.3rem;
       font-weight: 800;
       letter-spacing: 2px;
-      color: #fff;
       margin: 0 0 10px 0;
       text-transform: uppercase;
     }
 
-    .devlab-title span {
+    .devlab-main-title span {
       color: var(--neon-magenta);
-      text-shadow: 0 0 12px rgba(255, 0, 212, 0.6);
+      text-shadow: 0 0 14px rgba(255, 0, 212, 0.6);
     }
 
-    .devlab-subtitle {
+    .devlab-tagline {
       font-family: 'Space Mono', monospace;
       font-size: 0.95rem;
       color: var(--neon-cyan);
@@ -88,477 +130,502 @@
       margin: 0 0 15px 0;
     }
 
-    .devlab-description {
-      max-width: 780px;
+    .devlab-intro {
+      max-width: 760px;
       margin: 0 auto;
       color: var(--text-muted);
       font-size: 0.95rem;
       line-height: 1.6;
     }
 
-    /* Games Showcase Grid */
-    .section-headline {
+    /* Section Headers */
+    .section-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 40px 0 20px 0;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+      padding-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .section-title-bar h2 {
       font-family: 'Space Mono', monospace;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--neon-cyan);
-      margin: 40px 0 25px 0;
       letter-spacing: 1.5px;
+      margin: 0;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .section-headline::before {
-      content: '>';
+    .section-title-bar h2::before {
+      content: '►';
       color: var(--neon-magenta);
+      font-size: 0.9rem;
     }
 
-    .games-grid {
+    /* Playable Games Quick Cards */
+    .playable-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-bottom: 60px;
+      gap: 25px;
+      margin-bottom: 50px;
     }
 
-    .game-showcase-card {
-      background: rgba(13, 20, 38, 0.7);
+    .playable-card {
+      background: rgba(13, 20, 38, 0.75);
       border: 1px solid rgba(0, 240, 255, 0.2);
       border-radius: 8px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.4s ease;
-      position: relative;
+      transition: all 0.3s ease;
     }
 
-    .game-showcase-card:hover {
-      border-color: var(--neon-magenta);
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(255, 0, 212, 0.25);
+    .playable-card:hover {
+      border-color: var(--neon-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
     }
 
-    .game-banner-box {
-      height: 220px;
-      width: 100%;
-      background: #04050a;
+    .playable-thumb {
+      height: 180px;
+      background: #030408;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.1);
     }
 
-    .game-banner-box img {
+    .playable-thumb img {
       max-width: 90%;
-      max-height: 85%;
+      max-height: 80%;
       object-fit: contain;
-      transition: transform 0.5s ease;
     }
 
-    .game-showcase-card:hover .game-banner-box img {
-      transform: scale(1.06);
-    }
-
-    .game-status-badge {
+    .playable-badge {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 10px;
+      right: 10px;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 4px;
+      padding: 3px 8px;
+      border-radius: 3px;
       background: rgba(7, 9, 19, 0.85);
-      backdrop-filter: blur(8px);
     }
 
-    .badge-turclon {
-      border: 1px solid var(--neon-magenta);
-      color: var(--neon-magenta);
-      box-shadow: 0 0 8px rgba(255, 0, 212, 0.3);
-    }
-
-    .badge-cryworld {
-      border: 1px solid var(--neon-cyan);
-      color: var(--neon-cyan);
-      box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
-    }
-
-    .game-info {
-      padding: 25px;
-      flex-grow: 1;
+    .playable-body {
+      padding: 20px;
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
       justify-content: space-between;
     }
 
-    .game-title {
+    .playable-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 800;
+      font-size: 1.3rem;
+      font-weight: 700;
       color: #fff;
       margin: 0 0 8px 0;
-      letter-spacing: 1px;
     }
 
-    .game-tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-
-    .game-tech-tags span {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--neon-cyan);
-      background: rgba(0, 240, 255, 0.08);
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(0, 240, 255, 0.15);
-    }
-
-    .game-summary {
+    .playable-desc {
       color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin-bottom: 25px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
     }
 
-    .game-actions-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-play {
-      flex: 1;
+    .btn-launch-game {
+      width: 100%;
       text-align: center;
       background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 212, 0.2));
       border: 1px solid var(--neon-cyan);
       color: #fff;
       font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
       font-weight: 700;
-      font-size: 0.85rem;
-      padding: 12px 18px;
+      padding: 10px;
       border-radius: 4px;
       text-decoration: none;
       transition: all 0.3s ease;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
     }
 
-    .btn-play:hover {
+    .btn-launch-game:hover {
       background: var(--neon-cyan);
       color: #070913;
-      box-shadow: 0 0 16px var(--neon-cyan);
+      box-shadow: 0 0 15px var(--neon-cyan);
     }
 
-    .btn-feedback-quick {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 0, 212, 0.4);
-      color: var(--neon-magenta);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.82rem;
-      padding: 12px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-feedback-quick:hover {
-      background: rgba(255, 0, 212, 0.15);
-      border-color: var(--neon-magenta);
-      box-shadow: 0 0 12px rgba(255, 0, 212, 0.4);
-    }
-
-    /* Feedback & Devlog Forum Section */
-    .forum-container {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 30px;
-      background: rgba(13, 20, 38, 0.6);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      border-radius: 8px;
-      padding: 35px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    /* Form Panel */
-    .form-panel {
-      border-right: 1px solid rgba(0, 240, 255, 0.15);
-      padding-right: 30px;
-    }
-
-    .form-header {
-      margin-bottom: 25px;
-    }
-
-    .form-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.4rem;
-      color: #fff;
-      margin: 0 0 8px 0;
-      letter-spacing: 1px;
-    }
-
-    .form-desc {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-
-    .feedback-form-group {
-      margin-bottom: 18px;
-    }
-
-    .feedback-label {
-      display: block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--neon-cyan);
-      margin-bottom: 6px;
-    }
-
-    .feedback-input,
-    .feedback-select,
-    .feedback-textarea {
-      width: 100%;
-      background: rgba(4, 5, 10, 0.8);
-      border: 1px solid rgba(0, 240, 255, 0.25);
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 4px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.92rem;
-      outline: none;
-      transition: all 0.3s ease;
-      box-sizing: border-box;
-    }
-
-    .feedback-input:focus,
-    .feedback-select:focus,
-    .feedback-textarea:focus {
-      border-color: var(--neon-magenta);
-      box-shadow: 0 0 10px rgba(255, 0, 212, 0.4);
-      background: rgba(13, 20, 38, 0.9);
-    }
-
-    .feedback-textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    .btn-submit-feedback {
-      width: 100%;
-      background: linear-gradient(90deg, var(--neon-magenta), var(--neon-purple));
-      border: none;
-      color: #fff;
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 0.88rem;
-      padding: 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      letter-spacing: 1px;
-      box-shadow: 0 0 15px rgba(255, 0, 212, 0.35);
-    }
-
-    .btn-submit-feedback:hover {
-      box-shadow: 0 0 25px var(--neon-magenta);
-      transform: translateY(-2px);
-    }
-
-    /* Feed Panel */
-    .feed-panel {
+    /* Filter Controls */
+    .filter-bar {
       display: flex;
-      flex-direction: column;
-    }
-
-    .feed-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .feed-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.4rem;
-      color: #fff;
-      margin: 0;
-      letter-spacing: 1px;
-    }
-
-    .filter-pills {
-      display: flex;
-      gap: 8px;
-    }
-
-    .filter-btn {
+    .filter-chip {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(0, 240, 255, 0.2);
       color: var(--text-muted);
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      padding: 4px 10px;
+      font-size: 0.75rem;
+      padding: 6px 14px;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .filter-btn.active, .filter-btn:hover {
+    .filter-chip.active, .filter-chip:hover {
       background: rgba(0, 240, 255, 0.15);
       border-color: var(--neon-cyan);
-      color: var(--neon-cyan);
+      color: #fff;
     }
 
-    .comments-list {
+    /* Devlog Post Feed */
+    .posts-feed {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      max-height: 480px;
-      overflow-y: auto;
-      padding-right: 8px;
+      gap: 40px;
+      margin-top: 20px;
     }
 
-    /* Custom scrollbar for comments */
-    .comments-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    .comments-list::-webkit-scrollbar-thumb {
-      background: rgba(0, 240, 255, 0.3);
-      border-radius: 3px;
-    }
-
-    .comment-card {
-      background: rgba(4, 5, 10, 0.7);
-      border: 1px solid rgba(0, 240, 255, 0.15);
-      border-radius: 6px;
-      padding: 16px;
-      position: relative;
-      transition: all 0.3s ease;
+    .devlog-post {
+      background: rgba(13, 20, 38, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      transition: border-color 0.3s ease;
     }
 
-    .comment-card:hover {
-      border-color: rgba(255, 0, 212, 0.4);
+    .devlog-post:hover {
+      border-color: rgba(0, 240, 255, 0.4);
     }
 
-    .comment-card-top {
+    .post-header {
+      padding: 20px 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
       flex-wrap: wrap;
+      gap: 10px;
+      background: rgba(7, 9, 19, 0.4);
+    }
+
+    .post-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .post-game-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+    }
+
+    .tag-turclon-color {
+      background: rgba(255, 0, 212, 0.15);
+      border: 1px solid var(--neon-magenta);
+      color: var(--neon-magenta);
+    }
+
+    .tag-cryworld-color {
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+    }
+
+    .tag-general-color {
+      background: rgba(189, 0, 255, 0.15);
+      border: 1px solid var(--neon-purple);
+      color: var(--neon-purple);
+    }
+
+    .post-author-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .post-author-badge strong {
+      color: #fff;
+    }
+
+    .post-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .post-title-area {
+      padding: 20px 25px 10px 25px;
+    }
+
+    .post-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .post-content {
+      padding: 10px 25px 20px 25px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .post-content p {
+      margin-bottom: 12px;
+    }
+
+    /* Media Containers */
+    .post-media {
+      margin: 0 25px 20px 25px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      background: #020408;
+      max-height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .post-media img {
+      width: 100%;
+      height: auto;
+      max-height: 450px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .post-media-video {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+    }
+
+    .post-media-video iframe,
+    .post-media-video video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Comments Section under each Post */
+    .post-comments-container {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(4, 6, 14, 0.5);
+      padding: 20px 25px;
+    }
+
+    .comments-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding-bottom: 12px;
+      user-select: none;
+    }
+
+    .comments-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--neon-cyan);
+      display: flex;
+      align-items: center;
       gap: 6px;
     }
 
-    .comment-author-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .toggle-comments-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
-    .comment-author {
+    .toggle-comments-btn:hover {
+      color: var(--neon-cyan);
+    }
+
+    .comments-feed-single {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 15px 0 20px 0;
+    }
+
+    .single-comment {
+      background: rgba(13, 20, 38, 0.5);
+      border-left: 2px solid var(--neon-cyan);
+      padding: 12px 16px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .single-comment.from-dev {
+      border-left-color: var(--neon-magenta);
+      background: rgba(255, 0, 212, 0.05);
+    }
+
+    .single-comment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .single-comment-author {
       font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: #fff;
     }
 
-    .comment-tag {
+    .single-comment-author .badge-dev {
+      background: var(--neon-magenta);
+      color: #070913;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.65rem;
+      margin-left: 6px;
+    }
+
+    .single-comment-date {
       font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .single-comment-text {
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Add comment inline form */
+    .add-comment-box {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .add-comment-inputs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .input-author {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .input-comment-msg {
+      width: 100%;
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .comment-status-msg {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: #00ff88;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* Modal for Creating New Post */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: #0d1426;
+      border: 1px solid var(--neon-magenta);
+      box-shadow: 0 0 35px rgba(255, 0, 212, 0.4);
+      border-radius: 8px;
+      max-width: 650px;
+      width: 100%;
+      padding: 30px;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .modal-close-btn:hover {
+      color: #fff;
+    }
+
+    .modal-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.2rem;
+      color: var(--neon-magenta);
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .delete-post-btn {
+      background: none;
+      border: 1px solid rgba(255, 75, 75, 0.3);
+      color: #ff6b6b;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
       padding: 2px 6px;
       border-radius: 3px;
-      text-transform: uppercase;
-      font-weight: 700;
+      cursor: pointer;
+      margin-left: 10px;
     }
-
-    .tag-turclon {
-      background: rgba(255, 0, 212, 0.15);
-      border: 1px solid rgba(255, 0, 212, 0.4);
-      color: var(--neon-magenta);
-    }
-
-    .tag-cryworld {
-      background: rgba(0, 240, 255, 0.15);
-      border: 1px solid rgba(0, 240, 255, 0.4);
-      color: var(--neon-cyan);
-    }
-
-    .tag-general {
-      background: rgba(189, 0, 255, 0.15);
-      border: 1px solid rgba(189, 0, 255, 0.4);
-      color: var(--neon-purple);
-    }
-
-    .tag-dev {
-      background: rgba(0, 255, 136, 0.15);
-      border: 1px solid rgba(0, 255, 136, 0.4);
-      color: #00ff88;
-    }
-
-    .comment-date {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-family: 'Space Mono', monospace;
-    }
-
-    .comment-type-badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      color: #ffd700;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    .comment-text {
-      color: #e2e8f0;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      margin: 0;
-      word-break: break-word;
-    }
-
-    .feedback-success-msg {
-      display: none;
-      margin-top: 15px;
-      padding: 10px;
-      background: rgba(0, 255, 136, 0.15);
-      border: 1px solid #00ff88;
-      color: #00ff88;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
-      border-radius: 4px;
-      text-align: center;
-    }
-
-    /* Mobile Responsive Overrides */
-    @media (max-width: 900px) {
-      .games-grid {
-        grid-template-columns: 1fr;
-      }
-      .forum-container {
-        grid-template-columns: 1fr;
-        padding: 25px 20px;
-      }
-      .form-panel {
-        border-right: none;
-        border-bottom: 1px solid rgba(0, 240, 255, 0.15);
-        padding-right: 0;
-        padding-bottom: 30px;
-      }
-      .devlab-title {
-        font-size: 1.8rem;
-      }
+    .delete-post-btn:hover {
+      background: #ff4b4b;
+      color: #fff;
     }
   </style>
 </head>
@@ -570,13 +637,18 @@
     <img src="assets/cube_magenta.png" alt="Magenta Wireframe Cube" class="decor-cube-magenta">
   </div>
 
-  <div class="devlab-container">
+  <div class="devlab-wrapper">
     
-    <!-- Top Nav Bar -->
-    <div class="devlab-top-nav">
-      <a href="index.html" class="btn btn-outline btn-back" data-i18n="back_btn">
-        &lt; TORNA AL PORTFOLIO
-      </a>
+    <!-- Top Navigation Bar -->
+    <div class="devlab-nav">
+      <div class="nav-left-group">
+        <a href="index.html" class="btn btn-outline btn-nav" data-i18n="back_btn">
+          &lt; TORNA AL PORTFOLIO
+        </a>
+        <button class="btn-new-post" onclick="openNewPostModal()">
+          <span>+</span> <span data-i18n="btn_new_post">NUOVO POST DEV</span>
+        </button>
+      </div>
 
       <div class="lang-selector">
         <button class="lang-btn active" data-lang="it">IT</button>
@@ -586,298 +658,415 @@
     </div>
 
     <!-- Header Hero Section -->
-    <div class="devlab-hero">
-      <h1 class="devlab-title" data-i18n="hero_title">DANIELE POMPOSELLI // <span>DEV LAB</span></h1>
-      <p class="devlab-subtitle" data-i18n="hero_sub">[ TITOLI SPERIMENTALI &amp; COMMUNITY PLAYTEST ZONE ]</p>
-      <p class="devlab-description" data-i18n="hero_desc">
-        Benvenuto nel mio laboratorio di prototipazione indie! Qui puoi giocare direttamente nel browser ai titoli attualmente in fase di sviluppo attivo. Esplora le build, testa le meccaniche e condividi il tuo prezioso feedback nella bacheca sottostante per aiutarmi a rifinire il gameplay e le feature.
+    <div class="devlab-header-card">
+      <h1 class="devlab-main-title">DANIELE POMPOSELLI // <span>DEV LAB</span></h1>
+      <p class="devlab-tagline" data-i18n="hero_sub">[ DIARIO DI SVILUPPO, PROTOTIPI &amp; PLAYTEST ]</p>
+      <p class="devlab-intro" data-i18n="hero_desc">
+        Questo è lo spazio di ricerca e sviluppo dove condivido lo stato di avanzamento dei miei videogiochi indie con immagini, video e aggiornamenti tecnici. Prova i giochi in anteprima e lascia i tuoi commenti o consigli direttamente sotto ogni devlog!
       </p>
     </div>
 
-    <!-- Playable Games Grid -->
-    <h2 class="section-headline" data-i18n="games_headline">GIOCHI ATTUALMENTE IN SVILUPPO</h2>
+    <!-- Playable Games Grid (Quick Launch) -->
+    <div class="section-title-bar">
+      <h2 data-i18n="games_headline">PROVA I GIOCHI NEL BROWSER</h2>
+    </div>
     
-    <div class="games-grid">
+    <div class="playable-grid">
       
       <!-- GAME 1: TURCLON -->
-      <div class="game-showcase-card card-hud">
-        <div class="game-banner-box">
-          <img src="assets/turclon_logo.png" alt="TURCLON Neo-Geo 16-Bit Run 'n' Gun">
-          <span class="game-status-badge badge-turclon">ALPHA 0.8 // 16-BIT</span>
+      <div class="playable-card">
+        <div class="playable-thumb">
+          <img src="assets/turclon_logo.png" alt="TURCLON 16-Bit">
+          <span class="playable-badge badge-turclon">ALPHA 0.8</span>
         </div>
-        <div class="game-info">
-          <div>
-            <h3 class="game-title">TURCLON</h3>
-            <div class="game-tech-tags">
-              <span>Neo-Geo Style</span>
-              <span>16-Bit Arcade</span>
-              <span>HTML5 Canvas 2D</span>
-              <span>Retro Chiptune</span>
-            </div>
-            <p class="game-summary" data-i18n="turclon_desc">
-              Omaggio autentico all'epoca d'oro delle sale giochi arcade e dei classici SNK / Neo-Geo. Sparatutto a scorrimento Run 'n' Gun frenetico con fisica pixel-perfect, scanlines CRT vintage e selettore di autenticazione terminale.
-            </p>
-          </div>
-          <div class="game-actions-row">
-            <a href="https://danielepomposelli.com/games/turclon/index.html" target="_blank" rel="noopener noreferrer" class="btn-play" data-i18n="play_btn">
-              🕹️ AVVIA &amp; GIOCA ORA
-            </a>
-            <button class="btn-feedback-quick" onclick="selectGameForFeedback('TURCLON')" data-i18n="fb_quick">
-              💬 Feedback
-            </button>
-          </div>
+        <div class="playable-body">
+          <h3 class="playable-title">TURCLON</h3>
+          <p class="playable-desc" data-i18n="turclon_short_desc">
+            Run 'n' Gun arcade 16-bit ispirato alle gloriose sale giochi Neo-Geo con audio chiptune e grafica pixel-art.
+          </p>
+          <a href="https://danielepomposelli.com/games/turclon/index.html" target="_blank" rel="noopener noreferrer" class="btn-launch-game" data-i18n="play_turclon_btn">
+            🕹️ GIOCA A TURCLON
+          </a>
         </div>
       </div>
 
       <!-- GAME 2: CRYWORLD / ARCHIPELAGO -->
-      <div class="game-showcase-card card-hud">
-        <div class="game-banner-box">
-          <img src="assets/archipelago_card.png" alt="Cryworld Archipelago 3D Sandbox">
-          <span class="game-status-badge badge-cryworld">PROTOTYPE // 3D WEBGL</span>
+      <div class="playable-card">
+        <div class="playable-thumb">
+          <img src="assets/archipelago_card.png" alt="Cryworld Archipelago">
+          <span class="playable-badge badge-cryworld">PROTOTIPO 3D</span>
         </div>
-        <div class="game-info">
-          <div>
-            <h3 class="game-title">CRYWORLD (ARCHIPELAGO)</h3>
-            <div class="game-tech-tags">
-              <span>3D Sandbox</span>
-              <span>Procedural Terrain</span>
-              <span>Custom Physics Engine</span>
-              <span>Real-Time HUD</span>
-            </div>
-            <p class="game-summary" data-i18n="cryworld_desc">
-              Prototipo sandbox 3D in tempo reale nel browser. Naviga un arcipelago generato proceduralmente con fisica dinamica, HUD olografico cyberpunk con altimetro, contatore FPS in tempo reale e mirino interattivo.
-            </p>
-          </div>
-          <div class="game-actions-row">
-            <a href="https://danielepomposelli.com/games/cryworld/index.html" target="_blank" rel="noopener noreferrer" class="btn-play" data-i18n="play_btn_cry">
-              🚀 AVVIA &amp; GIOCA ORA
-            </a>
-            <button class="btn-feedback-quick" onclick="selectGameForFeedback('CRYWORLD')" data-i18n="fb_quick">
-              💬 Feedback
-            </button>
-          </div>
+        <div class="playable-body">
+          <h3 class="playable-title">CRYWORLD (ARCHIPELAGO)</h3>
+          <p class="playable-desc" data-i18n="cryworld_short_desc">
+            Esperimento sandbox 3D in WebGL con generazione del terreno in tempo reale, altimetro e fisica dinamica.
+          </p>
+          <a href="https://danielepomposelli.com/games/cryworld/index.html" target="_blank" rel="noopener noreferrer" class="btn-launch-game" data-i18n="play_cryworld_btn">
+            🚀 GIOCA A CRYWORLD
+          </a>
         </div>
       </div>
 
     </div>
 
-    <!-- Community Feedback Board / Blog Forum Section -->
-    <h2 class="section-headline" id="feedback-section" data-i18n="forum_headline">PLAYTEST FORUM &amp; DEVLOG FEEDBACK</h2>
-    
-    <div class="forum-container card-hud">
+    <!-- Devlog & Comments Section -->
+    <div class="section-title-bar">
+      <h2 data-i18n="devlog_headline">DEVLOG &amp; AGGIORNAMENTI DI SVILUPPO</h2>
       
-      <!-- Left Panel: Comment Form -->
-      <div class="form-panel">
-        <div class="form-header">
-          <h3 class="form-title" data-i18n="form_title">[ LASCIA UN FEEDBACK ]</h3>
-          <p class="form-desc" data-i18n="form_desc">Hai testato uno dei giochi? Aiutami a migliorarlo segnalando bug, idee o impressioni sul gameplay.</p>
-        </div>
-
-        <form id="feedback-form" onsubmit="handleFeedbackSubmit(event)">
-          <div class="feedback-form-group">
-            <label class="feedback-label" for="fb-author" data-i18n="label_author">NOME / NICKNAME</label>
-            <input type="text" id="fb-author" class="feedback-input" placeholder="Es: CyberPlayer88" required>
-          </div>
-
-          <div class="feedback-form-group">
-            <label class="feedback-label" for="fb-game" data-i18n="label_game">GIOCO DI RIFERIMENTO</label>
-            <select id="fb-game" class="feedback-select">
-              <option value="TURCLON">TURCLON (16-Bit Run 'n' Gun)</option>
-              <option value="CRYWORLD">CRYWORLD (3D Sandbox)</option>
-              <option value="GENERALE">FEEDBACK GENERALE / ENTRAMBI</option>
-            </select>
-          </div>
-
-          <div class="feedback-form-group">
-            <label class="feedback-label" for="fb-category" data-i18n="label_category">CATEGORIA SEGNALAZIONE</label>
-            <select id="fb-category" class="feedback-select">
-              <option value="💡 Suggerimento / Idea">💡 Suggerimento / Nuova Feature</option>
-              <option value="⚖️ Bilanciamento Gameplay">⚖️ Bilanciamento Gameplay &amp; Difficoltà</option>
-              <option value="🐛 Bug / Problema Tecnico">🐛 Bug / Problema Tecnico</option>
-              <option value="⭐ Impressioni Generali">⭐ Impressioni Generali</option>
-            </select>
-          </div>
-
-          <div class="feedback-form-group">
-            <label class="feedback-label" for="fb-message" data-i18n="label_message">IL TUO FEEDBACK</label>
-            <textarea id="fb-message" class="feedback-textarea" placeholder="Descrivi qui la tua esperienza di gioco, cosa ti è piaciuto o cosa modificheresti..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn-submit-feedback" data-i18n="submit_btn">
-            INVIA FEEDBACK ALLA COMMUNITY &gt;&gt;
-          </button>
-
-          <div id="feedback-success" class="feedback-success-msg" data-i18n="success_msg">
-            ✓ Feedback inviato al developer e pubblicato nella bacheca!
-          </div>
-        </form>
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="filterFeed('ALL')" data-i18n="filter_all">TUTTI</button>
+        <button class="filter-chip" onclick="filterFeed('TURCLON')">TURCLON</button>
+        <button class="filter-chip" onclick="filterFeed('CRYWORLD')">CRYWORLD</button>
       </div>
+    </div>
 
-      <!-- Right Panel: Live Feed of Comments & Devlogs -->
-      <div class="feed-panel">
-        <div class="feed-header">
-          <h3 class="feed-title" data-i18n="feed_title">[ FEED DELLA COMMUNITY ]</h3>
-          
-          <div class="filter-pills">
-            <button class="filter-btn active" id="btn-filter-all" onclick="filterComments('ALL')" data-i18n="filter_all">TUTTI</button>
-            <button class="filter-btn" id="btn-filter-turclon" onclick="filterComments('TURCLON')">TURCLON</button>
-            <button class="filter-btn" id="btn-filter-cryworld" onclick="filterComments('CRYWORLD')">CRYWORLD</button>
-          </div>
-        </div>
-
-        <div class="comments-list" id="comments-list">
-          <!-- Populated dynamically by JavaScript -->
-        </div>
-      </div>
-
+    <!-- Feed Container -->
+    <div class="posts-feed" id="posts-feed">
+      <!-- Injected via JavaScript -->
     </div>
 
   </div>
 
+  <!-- Modal for Creating New Devlog Post -->
+  <div class="modal-overlay" id="new-post-modal">
+    <div class="modal-window">
+      <button class="modal-close-btn" onclick="closeNewPostModal()">&times;</button>
+      <h3 class="modal-title">[ PUBBLICA NUOVO DEVLOG ]</h3>
+      <form id="create-post-form" onsubmit="handleCreatePost(event)">
+        <div class="feedback-form-group">
+          <label class="feedback-label">CODICE DI ACCESSO DEVELOPER</label>
+          <input type="password" id="dev-passcode" class="feedback-input" placeholder="Inserisci password (default: admin)" required>
+        </div>
+
+        <div class="feedback-form-group">
+          <label class="feedback-label">TITOLO DELL'AGGIORNAMENTO</label>
+          <input type="text" id="post-title-input" class="feedback-input" placeholder="Es: Nuove animazioni per il boss finale" required>
+        </div>
+
+        <div class="feedback-form-group">
+          <label class="feedback-label">PROGETTO / GIOCO</label>
+          <select id="post-game-select" class="feedback-select">
+            <option value="TURCLON">TURCLON</option>
+            <option value="CRYWORLD">CRYWORLD</option>
+            <option value="GENERALE">ALTRO / GENERALE</option>
+          </select>
+        </div>
+
+        <div class="feedback-form-group">
+          <label class="feedback-label">TIPO DI MEDIA</label>
+          <select id="post-media-type" class="feedback-select" onchange="toggleMediaInput()">
+            <option value="none">Nessun file multimediale (Solo testo)</option>
+            <option value="image">Immagine (URL o percorso /assets/nome.jpg)</option>
+            <option value="video">Video (Link YouTube o file MP4)</option>
+          </select>
+        </div>
+
+        <div class="feedback-form-group" id="media-url-group" style="display: none;">
+          <label class="feedback-label">URL IMMAGINE O VIDEO YOUTUBE</label>
+          <input type="text" id="post-media-url" class="feedback-input" placeholder="https://... oppure assets/...">
+        </div>
+
+        <div class="feedback-form-group">
+          <label class="feedback-label">TESTO DELL'AGGIORNAMENTO</label>
+          <textarea id="post-content-input" class="feedback-textarea" placeholder="Descrivi i progressi dello sviluppo, cosa hai testato, cosa cerchi dalla community..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit-feedback">
+          PUBBLICA SUBITO NEL DEVLOG &gt;&gt;
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script>
-    // Initial Pre-Populated Devlog & Playtest Posts
-    const INITIAL_POSTS = [
+    // Initial Base Devlog Posts by Daniele
+    const DEFAULT_POSTS = [
       {
-        id: 'post-1',
-        author: 'Daniele Pomposelli',
-        isDev: true,
-        game: 'TURCLON',
-        category: '📢 Devlog Release',
-        date: '18 Set 2026',
-        text: 'Aggiornata la build Alpha 0.8 con calibrazione del sistema audio stile Neo-Geo e scanline dinamiche. Fatemi sapere se sui vostri display l\'azione risulta fluida a 60fps!'
+        id: "post-turclon-01",
+        game: "TURCLON",
+        title: "Turclon Alpha 0.8: Sistema di tiro ad impulsi e scanlines CRT",
+        author: "Daniele Pomposelli",
+        date: "18 Settembre 2026",
+        mediaType: "image",
+        mediaUrl: "assets/turclon_logo.png",
+        content: `Abbiamo completato una nuova sessione di rifinitura per <strong>TURCLON</strong>, il nostro arcade run 'n' gun in stile Neo-Geo.<br><br>
+        <strong>Novità introdotte:</strong><br>
+        • Implementato shader di retro-scanline per simulare i monitor a tubo catodico.<br>
+        • Nuova sequenza di avvio con autenticazione terminale di sicurezza.<br>
+        • Migliorata la precisione delle hitbox di collisione dei proiettili.<br><br>
+        <em>Testate la demo e scrivetemi sotto cosa ne pensate della velocità di risposta dei comandi!</em>`,
+        comments: [
+          {
+            author: "Marco_Gamer90",
+            date: "19 Set 2026",
+            text: "L'effetto scanline è stupendo! Secondo me la velocità dei proiettili base potrebbe essere leggermente più alta per dare più dinamismo contro i primi nemici."
+          }
+        ]
       },
       {
-        id: 'post-2',
-        author: 'Daniele Pomposelli',
-        isDev: true,
-        game: 'CRYWORLD',
-        category: '📢 Devlog Release',
-        date: '14 Set 2026',
-        text: 'Implementato il nuovo controller della visuale e l\'indicatore dell\'altimetro nel canvas 3D. Sto lavorando all\'ottimizzazione della fisica del terreno.'
-      },
-      {
-        id: 'post-3',
-        author: 'Marco_Gamer90',
-        isDev: false,
-        game: 'TURCLON',
-        category: '⚖️ Bilanciamento Gameplay',
-        date: '19 Set 2026',
-        text: 'Ho provato Turclon: la colonna sonora arcade e l\'effetto scanline sono incredibili! Consiglierei solo di aumentare leggermente la velocità del proiettile standard per schivare meglio i primi nemici.'
-      },
-      {
-        id: 'post-4',
-        author: 'RetroPilot',
-        isDev: false,
-        game: 'CRYWORLD',
-        category: '💡 Suggerimento / Idea',
-        date: '19 Set 2026',
-        text: 'La fluidità dell\'arcipelago in 3D è ottima anche su portatile. Sarebbe fantastico aggiungere un tasto per il salto gravitazionale o una modalità turbo!'
+        id: "post-cryworld-01",
+        game: "CRYWORLD",
+        title: "Cryworld / Archipelago: Generazione procedurale 3D e HUD integrato",
+        author: "Daniele Pomposelli",
+        date: "15 Settembre 2026",
+        mediaType: "image",
+        mediaUrl: "assets/archipelago_card.png",
+        content: `I test sul prototipo 3D <strong>Cryworld</strong> procedono a pieno ritmo!<br><br>
+        <strong>Punti chiave di questo aggiornamento:</strong><br>
+        • Ottimizzazione del rendering WebGL per mantenere stabili i 60 FPS anche su laptop.<br>
+        • Nuovo HUD olografico con altimetro in tempo reale e mirino dinamico.<br>
+        • Bilanciamento della gravità e della traiettoria di volo.<br><br>
+        <em>Se riscontrate cali di frame rate o avete idee per l'interazione con l'ambiente, scrivetemelo qui sotto!</em>`,
+        comments: [
+          {
+            author: "LucaDev",
+            date: "19 Set 2026",
+            text: "Gira liscissimo anche su browser mobile! Sarebbe molto figo aggiungere una minimappa radar in basso a destra."
+          }
+        ]
       }
     ];
 
-    // Load from LocalStorage or initialize with defaults
-    function getStoredComments() {
-      const stored = localStorage.getItem('devlab_comments_data');
+    // Storage keys
+    const POSTS_STORAGE_KEY = 'daniele_devlab_posts_v1';
+
+    function getPosts() {
+      const stored = localStorage.getItem(POSTS_STORAGE_KEY);
       if (stored) {
         try {
           return JSON.parse(stored);
         } catch (e) {
-          return INITIAL_POSTS;
+          return DEFAULT_POSTS;
         }
       }
-      return INITIAL_POSTS;
+      return DEFAULT_POSTS;
     }
 
-    function saveComments(comments) {
-      localStorage.setItem('devlab_comments_data', JSON.stringify(comments));
+    function savePosts(posts) {
+      localStorage.setItem(POSTS_STORAGE_KEY, JSON.stringify(posts));
     }
 
-    let activeFilter = 'ALL';
+    let currentFilter = 'ALL';
+    let currentLang = 'it';
 
-    function renderComments() {
-      const container = document.getElementById('comments-list');
-      const comments = getStoredComments();
-      container.innerHTML = '';
+    const devlabTranslations = {
+      it: {
+        back_btn: "< TORNA AL PORTFOLIO",
+        btn_new_post: "NUOVO POST DEV",
+        hero_sub: "[ DIARIO DI SVILUPPO, PROTOTIPI &amp; PLAYTEST ]",
+        hero_desc: "Questo è lo spazio di ricerca e sviluppo dove condivido lo stato di avanzamento dei miei videogiochi indie con immagini, video e aggiornamenti tecnici. Prova i giochi in anteprima e lascia i tuoi commenti o consigli direttamente sotto ogni devlog!",
+        games_headline: "PROVA I GIOCHI NEL BROWSER",
+        turclon_short_desc: "Run 'n' Gun arcade 16-bit ispirato alle gloriose sale giochi Neo-Geo con audio chiptune e grafica pixel-art.",
+        cryworld_short_desc: "Esperimento sandbox 3D in WebGL con generazione del terreno in tempo reale, altimetro e fisica dinamica.",
+        play_turclon_btn: "🕹️ GIOCA A TURCLON",
+        play_cryworld_btn: "🚀 GIOCA A CRYWORLD",
+        devlog_headline: "DEVLOG &amp; AGGIORNAMENTI DI SVILUPPO",
+        filter_all: "TUTTI",
+        comment_placeholder_author: "Il tuo nome o nickname...",
+        comment_placeholder_text: "Scrivi un commento, feedback o suggerimento...",
+        btn_send_comment: "Invia Commento",
+        sending_comment: "Invio in corso...",
+        success_msg: "✓ Commento pubblicato e notificato al developer!"
+      },
+      en: {
+        back_btn: "< BACK TO PORTFOLIO",
+        btn_new_post: "NEW DEV POST",
+        hero_sub: "[ DEVLOGS, PROTOTYPES &amp; PLAYTEST ]",
+        hero_desc: "Welcome to my game development lab! Here I share devlogs, images, videos, and technical updates for my indie projects. Play the prototypes in your browser and leave your feedback below each post!",
+        games_headline: "PLAY IN YOUR BROWSER",
+        turclon_short_desc: "16-bit arcade run 'n' gun homage to classic Neo-Geo games with retro chiptune audio and pixel-art.",
+        cryworld_short_desc: "Real-time 3D WebGL sandbox experiment featuring procedural terrain generation, altimeter, and physics.",
+        play_turclon_btn: "🕹️ PLAY TURCLON",
+        play_cryworld_btn: "🚀 PLAY CRYWORLD",
+        devlog_headline: "DEVLOGS &amp; PROGRESS UPDATES",
+        filter_all: "ALL",
+        comment_placeholder_author: "Your name or nickname...",
+        comment_placeholder_text: "Leave your thoughts, feedback, or suggestions...",
+        btn_send_comment: "Post Comment",
+        sending_comment: "Sending...",
+        success_msg: "✓ Comment posted and sent to developer!"
+      },
+      ja: {
+        back_btn: "< ポートフォリオに戻る",
+        btn_new_post: "新規開発ポスト",
+        hero_sub: "[ 開発ログ、プロトタイプ、プレイテスト ]",
+        hero_desc: "インディーゲーム開発の現場へようこそ！ここでは画像や動画を交えてゲームの進捗状況を公開しています。ブラウザで直接プレイし、各投稿の下でご意見やご感想をお寄せください！",
+        games_headline: "ブラウザで遊べるゲーム",
+        turclon_short_desc: "レトロなチップチューンとドット絵を駆使した、ネオジオスタイルの16ビット爽快ガンアクション。",
+        cryworld_short_desc: "リアルタイム地形生成、高度計、物理演算を備えたWebGL 3Dサンドボックスのプロトタイプ。",
+        play_turclon_btn: "🕹️ TURCLONをプレイ",
+        play_cryworld_btn: "🚀 CRYWORLDをプレイ",
+        devlog_headline: "開発ログ ＆ コミュニティ掲示板",
+        filter_all: "すべて",
+        comment_placeholder_author: "お名前・ニックネーム...",
+        comment_placeholder_text: "コメントやご意見を入力...",
+        btn_send_comment: "コメントを送信",
+        sending_comment: "送信中...",
+        success_msg: "✓ コメントが投稿され、開発者に通知されました！"
+      }
+    };
 
-      const filtered = comments.filter(c => {
-        if (activeFilter === 'ALL') return true;
-        return c.game === activeFilter;
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function renderFeed() {
+      const feed = document.getElementById('posts-feed');
+      const posts = getPosts();
+      feed.innerHTML = '';
+
+      const filtered = posts.filter(p => {
+        if (currentFilter === 'ALL') return true;
+        return p.game === currentFilter;
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div style="color: #94a3b8; font-family: monospace; padding: 20px; text-align: center;">Nessun feedback trovato per questo filtro. Sii il primo a scriverne uno!</div>';
+        feed.innerHTML = '<div style="color: #94a3b8; font-family: monospace; text-align: center; padding: 40px;">Nessun post trovato per questo filtro.</div>';
         return;
       }
 
-      filtered.forEach(c => {
-        const card = document.createElement('div');
-        card.className = 'comment-card';
+      const t = devlabTranslations[currentLang] || devlabTranslations.it;
 
-        let tagClass = 'tag-general';
-        if (c.game === 'TURCLON') tagClass = 'tag-turclon';
-        else if (c.game === 'CRYWORLD') tagClass = 'tag-cryworld';
+      filtered.forEach((post) => {
+        const postCard = document.createElement('article');
+        postCard.className = 'devlog-post';
+        postCard.id = `post-card-${post.id}`;
 
-        const devBadge = c.isDev ? '<span class="comment-tag tag-dev">DEVELOPER</span>' : '';
+        let tagClass = 'tag-general-color';
+        if (post.game === 'TURCLON') tagClass = 'tag-turclon-color';
+        else if (post.game === 'CRYWORLD') tagClass = 'tag-cryworld-color';
 
-        card.innerHTML = `
-          <div class="comment-card-top">
-            <div class="comment-author-box">
-              <span class="comment-author">${escapeHtml(c.author)}</span>
-              ${devBadge}
-              <span class="comment-tag ${tagClass}">#${c.game}</span>
+        let mediaHtml = '';
+        if (post.mediaType === 'image' && post.mediaUrl) {
+          mediaHtml = `
+            <div class="post-media">
+              <img src="${escapeHtml(post.mediaUrl)}" alt="${escapeHtml(post.title)}" loading="lazy">
             </div>
-            <span class="comment-date">${c.date}</span>
+          `;
+        } else if (post.mediaType === 'video' && post.mediaUrl) {
+          // Check if YouTube
+          if (post.mediaUrl.includes('youtube.com') || post.mediaUrl.includes('youtu.be')) {
+            let embedUrl = post.mediaUrl;
+            if (post.mediaUrl.includes('watch?v=')) {
+              embedUrl = post.mediaUrl.replace('watch?v=', 'embed/');
+            } else if (post.mediaUrl.includes('youtu.be/')) {
+              embedUrl = post.mediaUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+            }
+            mediaHtml = `
+              <div class="post-media">
+                <div class="post-media-video">
+                  <iframe src="${escapeHtml(embedUrl)}" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </div>
+            `;
+          } else {
+            mediaHtml = `
+              <div class="post-media">
+                <div class="post-media-video">
+                  <video src="${escapeHtml(post.mediaUrl)}" controls preload="metadata"></video>
+                </div>
+              </div>
+            `;
+          }
+        }
+
+        const comments = post.comments || [];
+        let commentsListHtml = '';
+        comments.forEach(cm => {
+          const isDev = cm.author === 'Daniele Pomposelli' ? 'from-dev' : '';
+          const devBadge = cm.author === 'Daniele Pomposelli' ? '<span class="badge-dev">CREATOR</span>' : '';
+          commentsListHtml += `
+            <div class="single-comment ${isDev}">
+              <div class="single-comment-header">
+                <span class="single-comment-author">${escapeHtml(cm.author)} ${devBadge}</span>
+                <span class="single-comment-date">${escapeHtml(cm.date || '')}</span>
+              </div>
+              <p class="single-comment-text">${escapeHtml(cm.text)}</p>
+            </div>
+          `;
+        });
+
+        const deleteBtn = post.custom ? `<button class="delete-post-btn" onclick="deletePost('${post.id}')">Elimina</button>` : '';
+
+        postCard.innerHTML = `
+          <header class="post-header">
+            <div class="post-meta-left">
+              <span class="post-game-tag ${tagClass}">#${post.game}</span>
+              <span class="post-author-badge">Post di <strong>${escapeHtml(post.author)}</strong></span>
+              ${deleteBtn}
+            </div>
+            <span class="post-date">${escapeHtml(post.date)}</span>
+          </header>
+          <div class="post-title-area">
+            <h3 class="post-title">${escapeHtml(post.title)}</h3>
           </div>
-          <div class="comment-type-badge">${escapeHtml(c.category)}</div>
-          <p class="comment-text">${escapeHtml(c.text)}</p>
+          ${mediaHtml}
+          <div class="post-content">
+            <p>${post.content}</p>
+          </div>
+          <div class="post-comments-container">
+            <div class="comments-header-bar" onclick="toggleComments('${post.id}')">
+              <span class="comments-count">💬 ${comments.length} Commenti</span>
+              <button class="toggle-comments-btn" id="toggle-btn-${post.id}">Mostra/Nascondi</button>
+            </div>
+            <div id="comments-box-${post.id}">
+              <div class="comments-feed-single">
+                ${commentsListHtml || '<div style="color: #64748b; font-size: 0.85rem; font-style: italic;">Nessun commento ancora. Lascia il primo!</div>'}
+              </div>
+              <form class="add-comment-box" onsubmit="handleCommentSubmit(event, '${post.id}')">
+                <div class="add-comment-inputs">
+                  <input type="text" class="feedback-input input-author" placeholder="${t.comment_placeholder_author}" required>
+                  <button type="submit" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem;">
+                    ${t.btn_send_comment}
+                  </button>
+                </div>
+                <textarea class="feedback-textarea input-comment-msg" placeholder="${t.comment_placeholder_text}" required></textarea>
+                <div class="comment-status-msg" id="status-${post.id}">${t.success_msg}</div>
+              </form>
+            </div>
+          </div>
         `;
-        container.appendChild(card);
+
+        feed.appendChild(postCard);
       });
     }
 
-    function handleFeedbackSubmit(e) {
+    function toggleComments(postId) {
+      const box = document.getElementById(`comments-box-${postId}`);
+      if (box) {
+        box.style.display = box.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+
+    function handleCommentSubmit(e, postId) {
       e.preventDefault();
-      const authorInput = document.getElementById('fb-author');
-      const gameInput = document.getElementById('fb-game');
-      const categoryInput = document.getElementById('fb-category');
-      const messageInput = document.getElementById('fb-message');
-      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const form = e.target;
+      const authorInput = form.querySelector('.input-author');
+      const textInput = form.querySelector('.input-comment-msg');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const statusEl = document.getElementById(`status-${postId}`);
 
       const author = authorInput.value.trim();
-      const game = gameInput.value;
-      const category = categoryInput.value;
-      const message = messageInput.value.trim();
-
-      if (!author || !message) return;
+      const text = textInput.value.trim();
+      if (!author || !text) return;
 
       const today = new Date();
       const formattedDate = today.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' });
 
-      const newPost = {
-        id: 'post-' + Date.now(),
-        author: author,
-        isDev: false,
-        game: game,
-        category: category,
-        date: formattedDate,
-        text: message
-      };
+      // Save locally
+      const posts = getPosts();
+      const post = posts.find(p => p.id === postId);
+      if (post) {
+        if (!post.comments) post.comments = [];
+        post.comments.push({
+          author: author,
+          date: formattedDate,
+          text: text
+        });
+        savePosts(posts);
+      }
 
-      const comments = getStoredComments();
-      comments.unshift(newPost); // Add new comment at the top
-      saveComments(comments);
-
-      // Render updated list
-      renderComments();
-
-      // Show success message
-      const successEl = document.getElementById('feedback-success');
-      successEl.style.display = 'block';
-      setTimeout(() => {
-        successEl.style.display = 'none';
-      }, 5000);
-
-      // Send to perleaste@yahoo.it via FormSubmit
+      // Send email via FormSubmit to perleaste@yahoo.it
       if (submitBtn) submitBtn.disabled = true;
       fetch("https://formsubmit.co/ajax/perleaste@yahoo.it", {
         method: "POST",
@@ -886,134 +1075,124 @@
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          _subject: `[DevLab Feedback] ${game} - ${category} da ${author}`,
+          _subject: `[DevLab Commento] Post: ${post ? post.title : postId} da ${author}`,
+          Post: post ? post.title : postId,
+          Gioco: post ? post.game : "Generale",
           Autore: author,
-          Gioco: game,
-          Categoria: category,
-          Messaggio: message,
+          Commento: text,
           Data: formattedDate
         })
       })
       .then(res => res.json())
-      .then(data => {
-        console.log("Feedback inviato con successo:", data);
-      })
-      .catch(err => {
-        console.error("Errore invio feedback:", err);
-      })
+      .catch(err => console.log('Email forward info:', err))
       .finally(() => {
         if (submitBtn) submitBtn.disabled = false;
       });
 
-      // Clear fields
+      // Clear input and show confirmation
       authorInput.value = '';
-      messageInput.value = '';
+      textInput.value = '';
+      renderFeed();
 
-      // Scroll comments into view smoothly
-      document.getElementById('comments-list').scrollTop = 0;
+      // Show success msg
+      const newStatusEl = document.getElementById(`status-${postId}`);
+      if (newStatusEl) {
+        newStatusEl.style.display = 'block';
+        setTimeout(() => {
+          newStatusEl.style.display = 'none';
+        }, 4000);
+      }
     }
 
-    function filterComments(game) {
-      activeFilter = game;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent === (game === 'ALL' ? 'TUTTI' : game));
+    function filterFeed(game) {
+      currentFilter = game;
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        const isActive = (game === 'ALL' && (chip.textContent === 'TUTTI' || chip.textContent === 'ALL' || chip.textContent === 'すべて')) ||
+                         (chip.textContent === game);
+        chip.classList.toggle('active', isActive);
       });
-      renderComments();
+      renderFeed();
     }
 
     function selectGameForFeedback(gameName) {
-      const selectEl = document.getElementById('fb-game');
-      if (selectEl) {
-        selectEl.value = gameName;
+      filterFeed(gameName);
+      const feed = document.getElementById('posts-feed');
+      if (feed) {
+        feed.scrollIntoView({ behavior: 'smooth' });
       }
-      const section = document.getElementById('feedback-section');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
-      setTimeout(() => {
-        document.getElementById('fb-message').focus();
-      }, 500);
     }
 
-    function escapeHtml(str) {
-      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    // Modal logic
+    function openNewPostModal() {
+      document.getElementById('new-post-modal').classList.add('active');
     }
 
-    // Multilingual Translations for DevLab
-    const devlabTranslations = {
-      it: {
-        back_btn: "< TORNA AL PORTFOLIO",
-        hero_title: "DANIELE POMPOSELLI // <span>DEV LAB</span>",
-        hero_sub: "[ TITOLI SPERIMENTALI &amp; COMMUNITY PLAYTEST ZONE ]",
-        hero_desc: "Benvenuto nel mio laboratorio di prototipazione indie! Qui puoi giocare direttamente nel browser ai titoli attualmente in fase di sviluppo attivo. Esplora le build, testa le meccaniche e condividi il tuo prezioso feedback nella bacheca sottostante per aiutarmi a rifinire il gameplay e le feature.",
-        games_headline: "GIOCHI ATTUALMENTE IN SVILUPPO",
-        play_btn: "🕹️ AVVIA &amp; GIOCA ORA",
-        play_btn_cry: "🚀 AVVIA &amp; GIOCA ORA",
-        fb_quick: "💬 Feedback",
-        turclon_desc: "Omaggio autentico all'epoca d'oro delle sale giochi arcade e dei classici SNK / Neo-Geo. Sparatutto a scorrimento Run 'n' Gun frenetico con fisica pixel-perfect, scanlines CRT vintage e selettore di autenticazione terminale.",
-        cryworld_desc: "Prototipo sandbox 3D in tempo reale nel browser. Naviga un arcipelago generato proceduralmente con fisica dinamica, HUD olografico cyberpunk con altimetro, contatore FPS in tempo reale e mirino interattivo.",
-        forum_headline: "PLAYTEST FORUM &amp; DEVLOG FEEDBACK",
-        form_title: "[ LASCIA UN FEEDBACK ]",
-        form_desc: "Hai testato uno dei giochi? Aiutami a migliorarlo segnalando bug, idee o impressioni sul gameplay.",
-        label_author: "NOME / NICKNAME",
-        label_game: "GIOCO DI RIFERIMENTO",
-        label_category: "CATEGORIA SEGNALAZIONE",
-        label_message: "IL TUO FEEDBACK",
-        submit_btn: "INVIA FEEDBACK ALLA COMMUNITY >>",
-        success_msg: "✓ Feedback inviato al developer e pubblicato nella bacheca!",
-        feed_title: "[ FEED DELLA COMMUNITY ]",
-        filter_all: "TUTTI"
-      },
-      en: {
-        back_btn: "< BACK TO PORTFOLIO",
-        hero_title: "DANIELE POMPOSELLI // <span>DEV LAB</span>",
-        hero_sub: "[ EXPERIMENTAL TITLES &amp; COMMUNITY PLAYTEST ZONE ]",
-        hero_desc: "Welcome to my indie prototyping lab! Here you can play directly in your browser titles that are currently in active development. Explore builds, test mechanics, and share your feedback on the board below to help me polish gameplay and features.",
-        games_headline: "GAMES CURRENTLY IN DEVELOPMENT",
-        play_btn: "🕹️ LAUNCH &amp; PLAY NOW",
-        play_btn_cry: "🚀 LAUNCH &amp; PLAY NOW",
-        fb_quick: "💬 Feedback",
-        turclon_desc: "Authentic homage to the golden age of arcade games and Neo-Geo classics. Fast-paced Run 'n' Gun scrolling shooter with pixel-perfect physics, CRT vintage scanlines, and terminal security clearance.",
-        cryworld_desc: "Real-time 3D sandbox browser prototype. Explore a procedurally generated archipelago with dynamic physics, holographic cyberpunk HUD with altimeter, real-time FPS counter, and interactive crosshair.",
-        forum_headline: "PLAYTEST FORUM &amp; DEVLOG FEEDBACK",
-        form_title: "[ LEAVE FEEDBACK ]",
-        form_desc: "Tested one of the games? Help me improve it by reporting bugs, suggesting ideas, or sharing your gameplay impressions.",
-        label_author: "NAME / NICKNAME",
-        label_game: "TARGET GAME",
-        label_category: "FEEDBACK CATEGORY",
-        label_message: "YOUR FEEDBACK",
-        submit_btn: "POST FEEDBACK TO COMMUNITY >>",
-        success_msg: "✓ Feedback sent to developer and posted to board!",
-        feed_title: "[ COMMUNITY FEED ]",
-        filter_all: "ALL"
-      },
-      ja: {
-        back_btn: "< ポートフォリオに戻る",
-        hero_title: "DANIELE POMPOSELLI // <span>開発ラボ</span>",
-        hero_sub: "[ 実験的タイトル ＆ コミュニティ・プレイテストゾーン ]",
-        hero_desc: "インディーゲーム開発プロトタイピングラボへようこそ！現在開発中のタイトルをブラウザ上で直接プレイできます。メカニクスをテストし、ゲームプレイを洗練させるためのフィードバックをぜひ下の掲示板に残してください。",
-        games_headline: "現在開発中のゲーム",
-        play_btn: "🕹️ 今すぐプレイ",
-        play_btn_cry: "🚀 今すぐプレイ",
-        fb_quick: "💬 フィードバック",
-        turclon_desc: "アーケード黄金期とネオジオへの正統なオマージュ。ピクセルパーフェクトな物理演算、レトロCRTスキャンライン、ターミナル認証ゲートを備えたハイスピードRun 'n' Gun。",
-        cryworld_desc: "ブラウザ上で動作するリアルタイム3Dサンドボックス。動的な物理演算、高度計、リアルタイムFPSカウンター、照準を備えたサイバーパンクHUDで群島を探索。",
-        forum_headline: "プレイテスト掲示板 ＆ 開発フィードバック",
-        form_title: "[ フィードバックを投稿 ]",
-        form_desc: "ゲームをテストしましたか？バグ報告、新機能のアイデア、プレイの感想をお寄せください。",
-        label_author: "名前 / ニックネーム",
-        label_game: "対象ゲーム",
-        label_category: "カテゴリー",
-        label_message: "フィードバック内容",
-        submit_btn: "コミュニティに投稿する >>",
-        success_msg: "✓ 開発者に送信され、掲示板に投稿されました！",
-        feed_title: "[ コミュニティ・フィード ]",
-        filter_all: "すべて"
+    function closeNewPostModal() {
+      document.getElementById('new-post-modal').classList.remove('active');
+    }
+
+    function toggleMediaInput() {
+      const type = document.getElementById('post-media-type').value;
+      const group = document.getElementById('media-url-group');
+      group.style.display = type === 'none' ? 'none' : 'block';
+    }
+
+    function handleCreatePost(e) {
+      e.preventDefault();
+      const passcode = document.getElementById('dev-passcode').value;
+      // Simple passcode check
+      if (passcode !== 'daniele' && passcode !== 'admin') {
+        alert('Codice di accesso non valido. Usa "daniele" o "admin"');
+        return;
       }
-    };
+
+      const title = document.getElementById('post-title-input').value.trim();
+      const game = document.getElementById('post-game-select').value;
+      const mediaType = document.getElementById('post-media-type').value;
+      const mediaUrl = document.getElementById('post-media-url').value.trim();
+      const content = document.getElementById('post-content-input').value.trim();
+
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' });
+
+      const newPost = {
+        id: 'post-' + Date.now(),
+        game: game,
+        title: title,
+        author: "Daniele Pomposelli",
+        date: formattedDate,
+        mediaType: mediaType,
+        mediaUrl: mediaUrl,
+        content: content.replace(/\n/g, '<br>'),
+        custom: true,
+        comments: []
+      };
+
+      const posts = getPosts();
+      posts.unshift(newPost);
+      savePosts(posts);
+
+      closeNewPostModal();
+      document.getElementById('create-post-form').reset();
+      toggleMediaInput();
+      renderFeed();
+    }
+
+    function deletePost(postId) {
+      const passcode = prompt('Inserisci il codice di sicurezza per eliminare questo post:');
+      if (passcode !== 'daniele' && passcode !== 'admin') {
+        alert('Codice errato.');
+        return;
+      }
+      let posts = getPosts();
+      posts = posts.filter(p => p.id !== postId);
+      savePosts(posts);
+      renderFeed();
+    }
 
     function setLanguage(lang) {
       if (!devlabTranslations[lang]) lang = 'it';
+      currentLang = lang;
 
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
@@ -1026,37 +1205,28 @@
         }
       });
 
-      // Update back button href with lang query
       const backBtn = document.querySelector('.btn-back');
       if (backBtn) {
         backBtn.setAttribute('href', `index.html?lang=${lang}`);
       }
+
+      renderFeed();
     }
 
-    // Language selector buttons listener
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const selected = btn.getAttribute('data-lang');
-        setLanguage(selected);
+        setLanguage(btn.getAttribute('data-lang'));
       });
     });
 
-    // Initialize on DOM load
     document.addEventListener('DOMContentLoaded', () => {
-      renderComments();
-
-      // Read lang from URL
       const urlParams = new URLSearchParams(window.location.search);
       const urlLang = urlParams.get('lang');
       if (urlLang && devlabTranslations[urlLang]) {
         setLanguage(urlLang);
       } else {
         const browserLang = (navigator.language || '').substring(0, 2).toLowerCase();
-        if (devlabTranslations[browserLang]) {
-          setLanguage(browserLang);
-        } else {
-          setLanguage('it');
-        }
+        setLanguage(devlabTranslations[browserLang] ? browserLang : 'it');
       }
     });
   </script>
