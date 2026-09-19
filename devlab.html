@@ -17,6 +17,9 @@
   <!-- Base Stylesheet -->
   <link rel="stylesheet" href="index.css">
 
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     /* ==========================================================================
        DEVLAB & BLOG/FORUM SPECIFIC STYLES
@@ -830,6 +833,61 @@
     // Storage keys
     const POSTS_STORAGE_KEY = 'daniele_devlab_posts_v3';
 
+    // Supabase Cloud Database Client
+    const SUPABASE_URL = 'https://zoewesfvofeiptelcvya.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_kehOb-3u1wAZjC_xc7yu5w_t9SHP84U';
+    let supabaseClient = null;
+    try {
+      if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch (err) {
+      console.warn('Supabase initialization warning:', err);
+    }
+
+    async function loadCommentsFromCloud() {
+      if (!supabaseClient) return;
+      try {
+        const { data, error } = await supabaseClient
+          .from('devlab_comments')
+          .select('*')
+          .order('created_at', { ascending: true });
+
+        if (!error && Array.isArray(data)) {
+          const posts = getPosts();
+          let changed = false;
+
+          data.forEach(item => {
+            const post = posts.find(p => p.id === item.post_id);
+            if (post) {
+              if (!post.comments) post.comments = [];
+              const exists = post.comments.some(c => c.cloud_id === item.id || (c.author === item.author && c.text === item.comment));
+              if (!exists) {
+                const dateObj = new Date(item.created_at);
+                const formattedDate = !isNaN(dateObj) 
+                  ? dateObj.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })
+                  : '';
+                post.comments.push({
+                  cloud_id: item.id,
+                  author: item.author,
+                  date: formattedDate,
+                  text: item.comment
+                });
+                changed = true;
+              }
+            }
+          });
+
+          if (changed) {
+            savePosts(posts);
+            renderFeed();
+          }
+        }
+      } catch (err) {
+        console.warn('Could not load cloud comments:', err);
+      }
+    }
+
     function getPosts() {
       const stored = localStorage.getItem(POSTS_STORAGE_KEY);
       if (stored) {
@@ -1053,7 +1111,7 @@
       const today = new Date();
       const formattedDate = today.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' });
 
-      // Save locally
+      // Save locally as immediate feedback
       const posts = getPosts();
       const post = posts.find(p => p.id === postId);
       if (post) {
@@ -1066,8 +1124,28 @@
         savePosts(posts);
       }
 
-      // Send email via FormSubmit to perleaste@yahoo.it
       if (submitBtn) submitBtn.disabled = true;
+
+      // 1. Save to Supabase Cloud Database (publicly shared)
+      if (supabaseClient) {
+        supabaseClient.from('devlab_comments').insert([
+          {
+            post_id: postId,
+            game: post ? post.game : "GENERALE",
+            author: author,
+            comment: text
+          }
+        ]).then(({ data, error }) => {
+          if (error) {
+            console.warn("Supabase insert notice:", error);
+          } else {
+            console.log("Comment saved to Supabase cloud successfully!");
+            loadCommentsFromCloud();
+          }
+        }).catch(err => console.warn("Supabase exception:", err));
+      }
+
+      // 2. Send email via FormSubmit to perleaste@yahoo.it
       fetch("https://formsubmit.co/ajax/perleaste@yahoo.it", {
         method: "POST",
         headers: { 
@@ -1228,6 +1306,7 @@
         const browserLang = (navigator.language || '').substring(0, 2).toLowerCase();
         setLanguage(devlabTranslations[browserLang] ? browserLang : 'it');
       }
+      loadCommentsFromCloud();
     });
   </script>
 </body>
