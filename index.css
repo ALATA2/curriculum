@@ -182,6 +182,13 @@ body {
   width: 100%;
 }
 
+.sidebar-header .profile-pic-link {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
 .sidebar-header .profile-pic-container {
   width: 140px;
   height: 140px;
@@ -189,14 +196,53 @@ body {
   border: 2px solid rgba(0, 240, 255, 0.3);
   position: relative;
   box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sidebar-header .profile-pic-link:hover .profile-pic-container {
+  transform: scale(1.05);
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 25px rgba(255, 0, 212, 0.5), 0 0 45px rgba(0, 240, 255, 0.3);
 }
 
 .sidebar-header .profile-pic {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sidebar-header .profile-pic-link:hover .profile-pic {
+  transform: scale(1.05);
+}
+
+.profile-devlab-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(7, 9, 19, 0.92);
+  border: 1px solid var(--neon-magenta);
+  color: var(--neon-magenta);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(255, 0, 212, 0.4);
+  transition: all 0.3s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.sidebar-header .profile-pic-link:hover .profile-devlab-badge {
+  background: var(--neon-magenta);
+  color: #070913;
+  box-shadow: 0 0 18px var(--neon-magenta);
 }
 
 .sidebar-header .hero-name {
@@ -271,6 +317,20 @@ body {
 
 .sidebar-nav a:hover::after, .sidebar-nav a.active::after {
   width: 100%;
+}
+
+.sidebar-nav a.nav-devlab {
+  color: var(--neon-magenta);
+}
+
+.sidebar-nav a.nav-devlab::after {
+  background: var(--neon-magenta);
+  box-shadow: 0 0 10px var(--neon-magenta);
+}
+
+.sidebar-nav a.nav-devlab:hover {
+  color: #fff;
+  text-shadow: 0 0 10px var(--neon-magenta);
 }
 
 .sidebar-actions {

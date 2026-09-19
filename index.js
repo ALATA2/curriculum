@@ -246,16 +246,23 @@ document.addEventListener('DOMContentLoaded', () => {
     contentPanel.addEventListener('scroll', scrollSpy);
   }
 
-  // Smooth scroll for nav links (optional override fallback)
+  // Smooth scroll for nav links (only for internal anchor links starting with #)
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
       const targetId = link.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        const yOffset = -70; // Header height offset
-        const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+      if (targetId && targetId.startsWith('#')) {
+        e.preventDefault();
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          const isMobile = window.innerWidth <= 900;
+          if (isMobile) {
+            const yOffset = -70; // Header height offset
+            const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          } else if (contentPanel) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
       }
     });
   });
@@ -268,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_services: "SERVIZI",
       nav_about: "CHI SONO",
       nav_contact: "CONTATTI",
+      nav_devlab: "[05] DEV LAB 🎮",
       hero_subtitle: "CREATIVO DIGITALE | SVILUPPATORE INDIE | 3D & AI ARTIST",
       hero_explore: "ESPLORA I PROGETTI",
       hero_download_cv: "SCARICA CV / PORTFOLIO",
@@ -298,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_services: "SERVICES",
       nav_about: "ABOUT",
       nav_contact: "CONTACT",
+      nav_devlab: "[05] DEV LAB 🎮",
       hero_subtitle: "DIGITAL CREATIVE | INDIE DEVELOPER | 3D & AI ARTIST",
       hero_explore: "EXPLORE PROJECTS",
       hero_download_cv: "DOWNLOAD CV / PORTFOLIO",
@@ -328,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_services: "サービス",
       nav_about: "アバウト",
       nav_contact: "連絡先",
+      nav_devlab: "[05] 開発ラボ 🎮",
       hero_subtitle: "デジタルクリエイティブ | インディー開発者 | 3D & AI アーティスト",
       hero_explore: "プロジェクトを見る",
       hero_download_cv: "CV / ポートフォリオをダウンロード",
