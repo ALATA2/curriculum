@@ -707,8 +707,8 @@
             INVIA FEEDBACK ALLA COMMUNITY &gt;&gt;
           </button>
 
-          <div id="feedback-success" class="feedback-success-msg">
-            ✓ Feedback pubblicato con successo nella bacheca!
+          <div id="feedback-success" class="feedback-success-msg" data-i18n="success_msg">
+            ✓ Feedback inviato al developer e pubblicato nella bacheca!
           </div>
         </form>
       </div>
@@ -841,6 +841,7 @@
       const gameInput = document.getElementById('fb-game');
       const categoryInput = document.getElementById('fb-category');
       const messageInput = document.getElementById('fb-message');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
 
       const author = authorInput.value.trim();
       const game = gameInput.value;
@@ -874,7 +875,35 @@
       successEl.style.display = 'block';
       setTimeout(() => {
         successEl.style.display = 'none';
-      }, 4000);
+      }, 5000);
+
+      // Send to perleaste@yahoo.it via FormSubmit
+      if (submitBtn) submitBtn.disabled = true;
+      fetch("https://formsubmit.co/ajax/perleaste@yahoo.it", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `[DevLab Feedback] ${game} - ${category} da ${author}`,
+          Autore: author,
+          Gioco: game,
+          Categoria: category,
+          Messaggio: message,
+          Data: formattedDate
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Feedback inviato con successo:", data);
+      })
+      .catch(err => {
+        console.error("Errore invio feedback:", err);
+      })
+      .finally(() => {
+        if (submitBtn) submitBtn.disabled = false;
+      });
 
       // Clear fields
       authorInput.value = '';
@@ -931,6 +960,7 @@
         label_category: "CATEGORIA SEGNALAZIONE",
         label_message: "IL TUO FEEDBACK",
         submit_btn: "INVIA FEEDBACK ALLA COMMUNITY >>",
+        success_msg: "✓ Feedback inviato al developer e pubblicato nella bacheca!",
         feed_title: "[ FEED DELLA COMMUNITY ]",
         filter_all: "TUTTI"
       },
@@ -953,6 +983,7 @@
         label_category: "FEEDBACK CATEGORY",
         label_message: "YOUR FEEDBACK",
         submit_btn: "POST FEEDBACK TO COMMUNITY >>",
+        success_msg: "✓ Feedback sent to developer and posted to board!",
         feed_title: "[ COMMUNITY FEED ]",
         filter_all: "ALL"
       },
@@ -975,6 +1006,7 @@
         label_category: "カテゴリー",
         label_message: "フィードバック内容",
         submit_btn: "コミュニティに投稿する >>",
+        success_msg: "✓ 開発者に送信され、掲示板に投稿されました！",
         feed_title: "[ コミュニティ・フィード ]",
         filter_all: "すべて"
       }
