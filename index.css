@@ -912,6 +912,16 @@ section {
   border-color: #ff00d4;
 }
 
+#project-pomposale:hover {
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.45);
+}
+
+#project-pomposale::before,
+#project-pomposale::after {
+  border-color: #3b82f6;
+}
+
 #project-sesia:hover::before,
 #project-sesia:hover::after {
   width: 20px;
@@ -920,6 +930,12 @@ section {
 
 #project-vale:hover::before,
 #project-vale:hover::after {
+  width: 20px;
+  height: 20px;
+}
+
+#project-pomposale:hover::before,
+#project-pomposale:hover::after {
   width: 20px;
   height: 20px;
 }

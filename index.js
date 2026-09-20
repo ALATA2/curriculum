@@ -297,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
       status_loc: "BORGOSESIA_VC",
       project_sesia_desc: "Motore di ricerca della Valsesia.",
       project_vale_desc: "Blog di ricette, food branding e consulenza gastronomica.",
+      project_pomposale_desc: "Garage Digitale privato & archivio collezionismo.",
       contact_title: "CYBER_COMMUNICATION_PROTOCOL",
       contact_email: "Email"
     },
@@ -328,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
       status_loc: "BORGOSESIA_VC",
       project_sesia_desc: "Search engine of Valsesia.",
       project_vale_desc: "Recipe blog, food branding, and culinary consulting.",
+      project_pomposale_desc: "Private Digital Garage & collectible archive.",
       contact_title: "CYBER_COMMUNICATION_PROTOCOL",
       contact_email: "Email"
     },
@@ -359,6 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
       status_loc: "ボルゴセージア_VC",
       project_sesia_desc: "ヴァルセージア地方の検索エンジン。",
       project_vale_desc: "レシピブログ、フードブランディング、および料理コンサルティング。",
+      project_pomposale_desc: "プライベート・デジタルガレージ & コレクション・アーカイブ。",
       contact_title: "サイバー通信プロトコル",
       contact_email: "Eメール"
     }

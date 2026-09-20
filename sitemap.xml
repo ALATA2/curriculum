@@ -52,4 +52,11 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- POMPO-SALE Garage Digitale & Archivio -->
+  <url>
+    <loc>http://danielepomposelli.com/pomposale/index.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
